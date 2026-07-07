@@ -3,7 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>x-dc{display:block}helmet{display:none}</style>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="./support.js"></script>
 </head>
 <body>
 <x-dc>
@@ -892,5 +894,317 @@ input,textarea,select,button{font-family:inherit;}
 
 </div>
 </x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = {
+    route: 'home', capKey: 'laser', capsMenu: false, mobileNav: false,
+    matFilter: 'all', faqOpen: 0,
+    form: { name:'', company:'', email:'', phone:'', service:'', material:'', qty:'', date:'', details:'' },
+    files: [], dragging: false, submitted: false, errors: {}
+  };
+
+  capData = {
+    laser: {
+      name:'Laser Cutting', kicker:'Flat sheet & plate \u00b7 fiber laser', num:'01', navMachine:'TruLaser', machine:'Trumpf TruLaser',
+      blurb:'High-speed fiber laser cutting of sheet and plate with clean edges and tight tolerances.',
+      lead:'High-speed fiber laser cutting on Trumpf TruLaser systems \u2014 clean edges, repeatable tolerances, and fast turnaround on sheet and plate, from prototype to production.',
+      img:'assets/trulaser-2030.webp',
+      specs:[{k:'Max sheet size',v:'60\u2033 \u00d7 120\u2033'},{k:'Fiber power',v:'Up to 6 kW'},{k:'Carbon steel',v:'Up to 0.5\u2033'},{k:'Stainless',v:'Up to 0.25\u2033'},{k:'Aluminum',v:'Up to 0.25\u2033'},{k:'Tolerance',v:'\u00b10.005\u2033'}],
+      features:['Two shifts daily with expedited service available','Tight nesting for maximum material yield','Deburring and finishing available in-house','From one-off prototypes to production runs'],
+      machines:[{name:'TruLaser 3040',detail:'13\u2032 \u00d7 6.5\u2032 \u00b7 6 kW fiber'},{name:'TruLaser 5040 Fiber',detail:'Large-format plate'},{name:'TruLaser 2030',detail:'60\u2033 \u00d7 120\u2033 \u00b7 4 kW'}]
+    },
+    tube: {
+      name:'Tube Laser Cutting', kicker:'Trumpf TruLaser Tube 5000 \u00b7 first in Arizona', num:'02', navMachine:'Tube 5000', machine:'Tube 5000',
+      blurb:'Precise cutting, coping, and machining of round, square, and rectangular tube.',
+      lead:'The first Trumpf tube laser in Arizona. Precise cutting, coping, drilling, and marking of round, square, and rectangular tube and structural profiles \u2014 in a single setup.',
+      img:'assets/tube-parts.jpg',
+      specs:[{k:'Profiles',v:'Round, square, rectangular'},{k:'Processes',v:'Cut \u00b7 cope \u00b7 drill \u00b7 mark'},{k:'Materials',v:'Steel, stainless, aluminum'},{k:'Repeatability',v:'Production-grade'}],
+      features:['Eliminates secondary machining and fit-up operations','Weld-ready joints straight off the machine','Consistent part-to-part quality at volume','Reduces assembly time downstream'],
+      machines:[{name:'TruLaser Tube 5000',detail:'First in Arizona'}]
+    },
+    waterjet: {
+      name:'Waterjet Cutting', kicker:'OMAX 120 \u00b7 largest waterjet in Arizona', num:'03', navMachine:'OMAX 120', machine:'OMAX 120',
+      blurb:'5-axis abrasive waterjet that cuts virtually any material with no heat-affected zone.',
+      lead:'The largest waterjet in Arizona. A 5-axis OMAX 120 cuts virtually any material with no heat-affected zone \u2014 from 8-inch steel to glass, stone, and composites.',
+      img:'assets/waterjet-bed.webp',
+      specs:[{k:'Cutting bed',v:'20\u2032 \u00d7 10\u2032'},{k:'Axes',v:'5-axis taper control'},{k:'Max thickness',v:'Up to 8\u2033 steel'},{k:'Tolerance',v:'\u00b10.005\u2033'},{k:'Heat-affected zone',v:'None'},{k:'Dust',v:'Underwater cutting'}],
+      features:['Cuts any material \u2014 metal, stone, glass, composites','No thermal distortion or heat-affected zone','Stack cutting for higher throughput','Fine detail, inlay, and intricate geometry'],
+      machines:[{name:'OMAX 120',detail:'20\u2032 \u00d7 10\u2032 \u00b7 5-axis'}]
+    },
+    bending: {
+      name:'Press-Brake Bending', kicker:'Trumpf TruBend 5130', num:'04', navMachine:'TruBend', machine:'TruBend 5130',
+      blurb:'Accurate, repeatable forming up to 120 inches, integrated with our cutting.',
+      lead:'Precision forming on a Trumpf TruBend 5130 \u2014 accurate, repeatable bends up to 120 inches, integrated with our cutting so you get complete parts from one shop.',
+      img:'assets/trulaser-3040.webp',
+      specs:[{k:'Bend length',v:'Up to 120\u2033'},{k:'Control',v:'Trumpf BendGuard'},{k:'Tooling',v:'Wide range'},{k:'Integration',v:'Paired with cutting'}],
+      features:['One vendor for cut and formed parts','Tight, repeatable angle control','Prototype through production volumes','Reduced handling and lead time'],
+      machines:[{name:'TruBend 5130',detail:'120\u2033 capacity'}]
+    },
+    inspection: {
+      name:'2D Inspection', kicker:'In-process quality', num:'05', navMachine:'2D', machine:'2D inspection',
+      blurb:'In-process 2D inspection verifies parts against your drawings before they ship.',
+      lead:'In-process 2D inspection verifies dimensions against your drawings before parts leave the floor \u2014 documented, repeatable, and backed by our ISO 9001:2015 system.',
+      img:'assets/inspection.jpg',
+      specs:[{k:'Method',v:'2D optical inspection'},{k:'Reference',v:'Your CAD / drawings'},{k:'Output',v:'Dimensional verification'},{k:'Standard',v:'ISO 9001:2015'}],
+      features:['First-article inspection on new parts','Documented, traceable results','Issues caught before they reach you','Confidence on critical dimensions']
+    },
+    'material-sales': {
+      name:'Material Sales', kicker:'Sheet stock', num:'06', navMachine:'Sheet stock', machine:'Sheet stock',
+      blurb:'Buy sheet stock in full, half, and quarter sheets \u2014 metals and more.',
+      lead:'Need raw material? We sell sheet stock in full, half, and quarter sheets \u2014 carbon steel, stainless, aluminum, and more \u2014 and can cut it to size with your job.',
+      img:'assets/waterjet-bed.webp',
+      specs:[{k:'Sizes',v:'Full / half / quarter sheet'},{k:'Metals',v:'Carbon, stainless, aluminum'},{k:'Also',v:'Copper, brass & more'},{k:'Cut-to-size',v:'Available'}],
+      features:['Buy material together with your job','Remnant availability for small runs','Local pickup in Phoenix','Cut-to-size to your specs']
+    }
+  };
+  capOrder = ['laser','tube','waterjet','bending','inspection','material-sales'];
+
+  equipHighlights = [
+    { name:'TruLaser Tube 5000', spec:'First in AZ' },
+    { name:'OMAX 120 Waterjet', spec:'20\u2032\u00d710\u2032 \u00b7 8\u2033 steel' },
+    { name:'TruLaser 3040', spec:'6 kW fiber' },
+    { name:'TruBend 5130', spec:'120\u2033 press brake' }
+  ];
+
+  equipment = [
+    { name:'Trumpf TruLaser Tube 5000', type:'Tube laser', tag:'First in Arizona', img:'assets/tube-parts.jpg', specs:['Round, square & rectangular tube','Cut \u00b7 cope \u00b7 drill \u00b7 mark','Weld-ready, secondary-op-free parts'] },
+    { name:'OMAX 120 Waterjet', type:'5-axis abrasive waterjet', tag:'Largest in Arizona', img:'assets/waterjet-bed.webp', specs:['20\u2032 \u00d7 10\u2032 cutting bed','Up to 8\u2033 steel \u00b7 \u00b10.005\u2033','5-axis taper control \u00b7 no HAZ'] },
+    { name:'Trumpf TruLaser 3040', type:'6 kW fiber flat laser', tag:'', img:'assets/trulaser-3040.webp', specs:['13\u2032 \u00d7 6.5\u2032 sheet capacity','6 kW fiber source','High-speed nesting'] },
+    { name:'Trumpf TruLaser 5040 Fiber', type:'Fiber flat laser', tag:'', img:'', specs:['Large-format sheet & plate','High-output fiber cutting','Production throughput'] },
+    { name:'Trumpf TruLaser 2030', type:'4 kW fiber laser', tag:'', img:'assets/trulaser-2030.webp', specs:['60\u2033 \u00d7 120\u2033 sheet','0.5\u2033 carbon \u00b7 0.25\u2033 SS \u00b7 0.25\u2033 alum','4 kW fiber source'] },
+    { name:'Trumpf TruBend 5130', type:'Press brake', tag:'', img:'', specs:['Up to 120\u2033 bend length','Precision angle control','Integrated with cutting'] },
+    { name:'2D Optical Inspection', type:'Quality verification', tag:'ISO 9001:2015', img:'assets/inspection.jpg', specs:['Dimensional verification to CAD','First-article inspection','Documented results'] }
+  ];
+
+  materials = [
+    { name:'Carbon Steel', cat:'metal' }, { name:'Stainless Steel', cat:'metal' }, { name:'Aluminum', cat:'metal' },
+    { name:'Copper', cat:'metal' }, { name:'Brass', cat:'metal' }, { name:'Bronze', cat:'metal' }, { name:'Nickel', cat:'metal' },
+    { name:'Titanium', cat:'exotic' }, { name:'Tungsten', cat:'exotic' }, { name:'Inconel & alloys', cat:'exotic' },
+    { name:'Ceramic', cat:'nonmetal' }, { name:'Glass', cat:'nonmetal' }, { name:'Granite', cat:'nonmetal' }, { name:'Marble', cat:'nonmetal' },
+    { name:'Carbon Fiber', cat:'nonmetal' }, { name:'Kevlar', cat:'nonmetal' }, { name:'Fiberglass', cat:'nonmetal' },
+    { name:'VCT Tile', cat:'nonmetal' }, { name:'Foam', cat:'nonmetal' }, { name:'Plastics', cat:'nonmetal' }, { name:'Composites', cat:'nonmetal' }
+  ];
+  catLabels = { metal:'Metal', exotic:'Exotic / hard', nonmetal:'Non-metal / composite' };
+  matFilters = [ {key:'all',label:'All materials'},{key:'metal',label:'Metals'},{key:'exotic',label:'Exotic & hard'},{key:'nonmetal',label:'Non-metal & composite'} ];
+
+  industries = [
+    { name:'Aerospace', blurb:'Flight-critical brackets, panels, and structural components to spec.' },
+    { name:'Defense & Military', blurb:'Exotic alloys, tight tolerances, and documented, traceable quality.' },
+    { name:'Automotive', blurb:'Prototypes through production runs in sheet and tube.' },
+    { name:'Architecture', blurb:'Decorative panels, facades, railings, and signage.' },
+    { name:'Alternative Energy', blurb:'Solar, battery, and power-system hardware.' },
+    { name:'Oil & Gas', blurb:'Heavy plate, flanges, and corrosion-resistant alloys.' },
+    { name:'CNC & Machining', blurb:'Blanks and near-net shapes for downstream machining.' },
+    { name:'Electronics', blurb:'Enclosures, chassis, and EMI shielding.' },
+    { name:'Dental & Medical', blurb:'Fine detail in stainless and titanium.' },
+    { name:'Flooring & Stone', blurb:'Waterjet inlay in tile, stone, and composites.' }
+  ];
+
+  faqs = [
+    { q:'How fast can I get a quote?', a:'Most quotes go out within 4\u201324 hours of receiving your files. Need it sooner? Call us \u2014 expedited service is available.' },
+    { q:'What file formats do you accept?', a:'STEP, IGES, DXF, DWG, STL, SLDPRT, SAT, AI, EPS, PDF and more. If you have it, we can usually read it.' },
+    { q:'What is the largest part you can cut?', a:'Our OMAX 120 waterjet \u2014 the largest in Arizona \u2014 has a 20\u2032 \u00d7 10\u2032 bed and cuts up to 8\u2033 steel at \u00b10.005\u2033.' },
+    { q:'Laser or waterjet \u2014 which should I choose?', a:'Laser is fastest and cleanest on thinner sheet and tube; waterjet cuts thick plate and any material with no heat-affected zone. Not sure? Send the drawing and we\u2019ll recommend the right process.' },
+    { q:'Do you ship outside Arizona?', a:'Yes \u2014 we ship across the United States, Mexico, and Canada.' },
+    { q:'Are you certified?', a:'Yes \u2014 ISO 9001:2015 certified and a member of the NTMA. Factory-trained, certified operators run every machine.' },
+    { q:'Do you offer forming and finishing?', a:'Yes \u2014 press-brake bending up to 120\u2033 on a Trumpf TruBend 5130, plus deburring and finishing, so you get complete parts from one shop.' }
+  ];
+
+  compareRows = [
+    { f:'Best for', l:'Thin\u2013medium sheet & tube', w:'Thick plate & any material' },
+    { f:'Max thickness', l:'~0.5\u2033 carbon steel', w:'Up to 8\u2033 steel' },
+    { f:'Heat-affected zone', l:'Minimal', w:'None' },
+    { f:'Edge finish', l:'Clean, slight oxide', w:'Smooth, burr-free' },
+    { f:'Speed', l:'Very fast', w:'Moderate' },
+    { f:'Materials', l:'Metals', w:'Metals, stone, glass, composites' },
+    { f:'Tolerance', l:'\u00b10.005\u2033', w:'\u00b10.005\u2033' }
+  ];
+
+  stats = [ {k:'20+',l:'Years in Phoenix'}, {k:'4\u201324 hr',l:'Quote turnaround'}, {k:'8\u2033',l:'Max steel thickness'}, {k:'20\u2032\u00d710\u2032',l:'Largest waterjet in AZ'} ];
+  process = [
+    {n:'01',t:'Send your files',d:'Upload CAD or drawings \u2014 STEP, DXF, DWG, PDF and more \u2014 with material and quantity.'},
+    {n:'02',t:'Get a fast quote',d:'We review and return pricing in 4\u201324 hours, with the right process recommended.'},
+    {n:'03',t:'We cut & form',d:'Laser, waterjet, tube, and press brake \u2014 two shifts daily, with expedited options.'},
+    {n:'04',t:'Inspect & ship',d:'2D inspection to ISO 9001:2015, then shipped across the US, Mexico & Canada.'}
+  ];
+  serviceOptions = ['Laser cutting','Tube laser cutting','Waterjet cutting','Press-brake bending','2D inspection','Material sales','Multiple / not sure'];
+  quoteTips = ['CAD files (STEP/IGES) or a dimensioned PDF drawing','Material and thickness','Quantity and any repeat schedule','Tolerances, finishing, and target delivery date'];
+  areasMetro = ['Phoenix','Mesa','Tempe','Chandler','Scottsdale','Gilbert','Glendale','Peoria','Surprise','Goodyear','Tucson','Flagstaff','Prescott','Casa Grande'];
+  areasRegional = ['Arizona','California','Nevada','New Mexico','Colorado','Utah','Texas','Oklahoma'];
+  values = [
+    {t:'Understand',d:'We start by understanding your part, your tolerances, and your timeline \u2014 before a single cut.'},
+    {t:'Deliver',d:'Fast quotes, two shifts a day, and ISO-backed quality so parts arrive right and on time.'},
+    {t:'Improve',d:'We refine process and yield on every job \u2014 better parts, better lead times, over the long run.'}
+  ];
+
+  blankForm(){ return { name:'', company:'', email:'', phone:'', service:'', material:'', qty:'', date:'', details:'' }; }
+
+  rootRef = (el) => { this._root = el; };
+  headerRef = (el) => { this._header = el; };
+  fileInputRef = (el) => { this._fileInput = el; };
+
+  componentDidMount(){
+    this._onScroll = () => { if(!this._header) return; const s = (window.scrollY||window.pageYOffset||0) > 6; this._header.style.boxShadow = s ? '0 10px 30px -22px rgba(20,23,26,.5)' : 'none'; };
+    window.addEventListener('scroll', this._onScroll, { passive:true });
+    setTimeout(() => this.setupReveal(), 50);
+  }
+  componentWillUnmount(){ window.removeEventListener('scroll', this._onScroll); if(this._io) this._io.disconnect(); }
+  componentDidUpdate(pp, ps){ if(!ps || ps.route !== this.state.route || ps.capKey !== this.state.capKey){ setTimeout(() => this.setupReveal(), 30); } }
+
+  setupReveal = () => {
+    if(!this._root || typeof IntersectionObserver === 'undefined') return;
+    if(this._io) this._io.disconnect();
+    const io = new IntersectionObserver((ents) => {
+      ents.forEach(en => { if(en.isIntersecting){ en.target.style.opacity='1'; en.target.style.transform='none'; io.unobserve(en.target); } });
+    }, { threshold:0.08, rootMargin:'0px 0px -6% 0px' });
+    this._io = io;
+    const vh = window.innerHeight || 800;
+    this._root.querySelectorAll('[data-reveal]').forEach(el => {
+      const r = el.getBoundingClientRect();
+      if(r.top > vh * 0.94){
+        el.style.opacity='0'; el.style.transform='translateY(26px)';
+        el.style.transition='opacity .7s cubic-bezier(.16,.84,.44,1), transform .7s cubic-bezier(.16,.84,.44,1)';
+        io.observe(el);
+      } else { el.style.opacity='1'; el.style.transform='none'; }
+    });
+  };
+
+  handleClick = (e) => {
+    const a = e.target.closest('[data-route]');
+    if(!a || !this._root.contains(a)) return;
+    e.preventDefault();
+    const route = a.getAttribute('data-route');
+    const cap = a.getAttribute('data-cap');
+    const ns = { route, mobileNav:false, capsMenu:false };
+    if(cap) ns.capKey = cap;
+    this.setState(ns, () => { try { window.scrollTo(0,0); } catch(err){} setTimeout(() => this.setupReveal(), 30); });
+  };
+
+  openCaps = () => this.setState({ capsMenu:true });
+  closeCaps = () => this.setState({ capsMenu:false });
+  toggleMobile = () => this.setState(s => ({ mobileNav: !s.mobileNav }));
+  cardEnter = (e) => { const b = e.currentTarget.querySelector('[data-cardbar]'); if(b) b.style.transform='scaleX(1)'; e.currentTarget.style.background='#fbfbfb'; };
+  cardLeave = (e) => { const b = e.currentTarget.querySelector('[data-cardbar]'); if(b) b.style.transform='scaleX(0)'; e.currentTarget.style.background='#fff'; };
+  setFilter = (e) => { this.setState({ matFilter: e.currentTarget.getAttribute('data-filter') }); };
+  toggleFaq = (e) => { const i = +e.currentTarget.getAttribute('data-faq'); this.setState(s => ({ faqOpen: s.faqOpen === i ? null : i })); };
+
+  handleField = (e) => { const { name, value } = e.target; this.setState(s => ({ form: { ...s.form, [name]: value }, errors: { ...s.errors, [name]: undefined } })); };
+  fmtBytes(n){ if(n == null) return ''; if(n < 1024) return n + ' B'; if(n < 1048576) return (n/1024).toFixed(0) + ' KB'; return (n/1048576).toFixed(1) + ' MB'; }
+  addFiles = (list) => { const arr = Array.from(list || []); if(!arr.length) return; this.setState(s => ({ files: [...s.files, ...arr.map(f => ({ name:f.name, size:f.size }))] })); };
+  onFileInput = (e) => { this.addFiles(e.target.files); e.target.value=''; };
+  onDrop = (e) => { e.preventDefault(); this.setState({ dragging:false }); this.addFiles(e.dataTransfer.files); };
+  onDragOver = (e) => { e.preventDefault(); if(!this.state.dragging) this.setState({ dragging:true }); };
+  onDragLeave = (e) => { e.preventDefault(); this.setState({ dragging:false }); };
+  removeFile = (e) => { const i = +e.currentTarget.getAttribute('data-idx'); this.setState(s => ({ files: s.files.filter((_,k) => k !== i) })); };
+  openFilePicker = () => { if(this._fileInput) this._fileInput.click(); };
+  resetForm = () => this.setState({ submitted:false, form:this.blankForm(), files:[], errors:{} }, () => { try{ window.scrollTo(0,0);}catch(e){} });
+  submitForm = (e) => {
+    e.preventDefault();
+    const f = this.state.form; const errors = {};
+    if(!f.name || !f.name.trim()) errors.name = 'Please enter your name';
+    if(!f.email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email)) errors.email = 'Enter a valid email address';
+    if(!f.details || !f.details.trim()) errors.details = 'Tell us a little about your project';
+    if(Object.keys(errors).length){ this.setState({ errors }); return; }
+    this.setState({ submitted:true }, () => { try { window.scrollTo(0,0); } catch(err){} });
+  };
+
+  inputStyle(err){ return 'width:100%;padding:13px 14px;border:1px solid ' + (err ? '#c0392b' : '#cdd2d6') + ';background:#fff;font-size:15px;color:#14171a;outline:none;'; }
+
+  renderVals(){
+    const st = this.state;
+    const cap = { ...this.capData[st.capKey], key:st.capKey };
+    cap.hasMachines = !!(cap.machines && cap.machines.length);
+
+    const capList = this.capOrder.map(k => ({ key:k, name:this.capData[k].name, machine:this.capData[k].navMachine, num:this.capData[k].num, blurb:this.capData[k].blurb }));
+    const capLinks = this.capOrder.map(k => { const active = k === st.capKey; return { key:k, name:this.capData[k].name, machine:this.capData[k].navMachine, bg: active ? '#14171a' : '#fff', fg: active ? '#fff' : '#14171a', muted: active ? '#ffb300' : '#9aa1a7' }; });
+
+    const filtered = st.matFilter === 'all' ? this.materials : this.materials.filter(m => m.cat === st.matFilter);
+    const matView = filtered.map(m => ({ name:m.name, cat:this.catLabels[m.cat] }));
+    const matFilters = this.matFilters.map(f => ({ ...f, active: f.key === st.matFilter, bg: f.key === st.matFilter ? '#14171a' : '#fff', fg: f.key === st.matFilter ? '#fff' : '#3a4147', bd: f.key === st.matFilter ? '#14171a' : '#cdd2d6' }));
+
+    const faqsView = this.faqs.map((q,i) => ({ q:q.q, a:q.a, idx:i, open: st.faqOpen === i, sign: st.faqOpen === i ? '\u2212' : '+' }));
+
+    const fileList = st.files.map((f,i) => { const m = (f.name||'').match(/\.([^.]+)$/); return { name:f.name, size:this.fmtBytes(f.size), ext: m ? m[1].toUpperCase() : 'FILE', idx:i }; });
+
+    const mobileLinks = [
+      { label:'Laser Cutting', route:'capability', cap:'laser' },
+      { label:'Tube Laser', route:'capability', cap:'tube' },
+      { label:'Waterjet', route:'capability', cap:'waterjet' },
+      { label:'Press-Brake Bending', route:'capability', cap:'bending' },
+      { label:'Equipment', route:'equipment', cap:'' },
+      { label:'Materials', route:'materials', cap:'' },
+      { label:'Industries', route:'industries', cap:'' },
+      { label:'Quality', route:'quality', cap:'' },
+      { label:'Resources', route:'resources', cap:'' },
+      { label:'Areas We Serve', route:'areas', cap:'' },
+      { label:'About', route:'about', cap:'' },
+      { label:'Contact', route:'contact', cap:'' }
+    ];
+
+    const er = st.errors || {};
+    const dragging = st.dragging;
+
+    return {
+      year: 2026,
+      route: st.route,
+      isHome: st.route === 'home',
+      isCapability: st.route === 'capability',
+      isQuote: st.route === 'quote',
+      isEquipment: st.route === 'equipment',
+      isMaterials: st.route === 'materials',
+      isIndustries: st.route === 'industries',
+      isQuality: st.route === 'quality',
+      isResources: st.route === 'resources',
+      isAreas: st.route === 'areas',
+      isAbout: st.route === 'about',
+      isContact: st.route === 'contact',
+      capsMenu: st.capsMenu,
+      mobileNav: st.mobileNav,
+      mobileLinks,
+      cap, capList, capLinks,
+      equipHighlights: this.equipHighlights,
+      equipment: this.equipment.map(e => ({ ...e, hasImg: !!e.img, noImg: !e.img })),
+      materialChips: this.materials.slice(0,14).map(m => m.name),
+      matView, matFilters, matCount: matView.length,
+      industries: this.industries,
+      industriesShort: this.industries.slice(0,8).map(i => i.name),
+      faqs: faqsView,
+      compareRows: this.compareRows.map((r,i) => ({ ...r, bg: i % 2 ? '#f6f7f8' : '#fff' })),
+      qualityPoints: [
+        { t:'ISO 9001:2015 certified', d:'An audited quality management system governs how we plan, cut, inspect, and ship \u2014 documented and traceable on every order.' },
+        { t:'In-process 2D inspection', d:'Parts are verified against your drawings before they leave the floor, with first-article inspection on new work.' },
+        { t:'Factory-trained operators', d:'Every Trumpf and OMAX machine is run by certified, factory-trained operators \u2014 the people who make tolerances repeatable.' },
+        { t:'Continuous improvement', d:'We review yield, process, and lead time on every job so quality and turnaround keep getting better.' }
+      ],
+      contactRows: [
+        { label:'Visit', value:'788 W. Illini St, Phoenix, AZ 85041' },
+        { label:'Call', value:'480.306.7748' },
+        { label:'Email', value:'info@swwj-laser.com' },
+        { label:'Hours', value:'Mon\u2013Fri \u00b7 Two shifts daily' }
+      ],
+      stats: this.stats, process: this.process,
+      values: this.values,
+      areasMetro: this.areasMetro, areasRegional: this.areasRegional,
+      serviceOptions: this.serviceOptions, quoteTips: this.quoteTips,
+      form: st.form,
+      submitted: st.submitted, notSubmitted: !st.submitted,
+      hasFiles: st.files.length > 0, fileList,
+      filesNote: st.files.length ? (' and ' + st.files.length + ' file' + (st.files.length>1?'s':'')) : '',
+      errName: er.name, errEmail: er.email, errDetails: er.details,
+      inputStyleBase: this.inputStyle(false),
+      inputStyleName: this.inputStyle(er.name),
+      inputStyleEmail: this.inputStyle(er.email),
+      selectStyle: this.inputStyle(false) + 'appearance:none;cursor:pointer;background-image:url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'12\' height=\'12\' viewBox=\'0 0 12 12\'><path d=\'M2 4l4 4 4-4\' stroke=\'%236c757d\' stroke-width=\'1.5\' fill=\'none\'/></svg>");background-repeat:no-repeat;background-position:right 14px center;',
+      textareaStyle: this.inputStyle(er.details) + 'resize:vertical;min-height:108px;line-height:1.5;',
+      dropStyle: 'border:2px dashed ' + (dragging ? '#ffb300' : '#cdd2d6') + ';background:' + (dragging ? '#fffaf0' : '#fafbfb') + ';padding:38px 24px;text-align:center;cursor:pointer;transition:background .15s,border-color .15s;',
+      handleClick: this.handleClick, openCaps: this.openCaps, closeCaps: this.closeCaps, toggleMobile: this.toggleMobile,
+      rootRef: this.rootRef, headerRef: this.headerRef, fileInputRef: this.fileInputRef,
+      cardEnter: this.cardEnter, cardLeave: this.cardLeave,
+      setFilter: this.setFilter, toggleFaq: this.toggleFaq,
+      handleField: this.handleField, onFileInput: this.onFileInput, onDrop: this.onDrop, onDragOver: this.onDragOver, onDragLeave: this.onDragLeave, removeFile: this.removeFile, openFilePicker: this.openFilePicker, submitForm: this.submitForm, resetForm: this.resetForm
+    };
+  }
+}
+</script>
 </body>
 </html>
