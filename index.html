@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>x-dc{display:block}helmet{display:none}</style>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Expanded:wght@600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{font-family:'Archivo',system-ui,sans-serif;color:#14171a;background:#fff;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+img{display:block;max-width:100%;}
+::selection{background:#ffb300;color:#14171a;}
+input,textarea,select,button{font-family:inherit;}
+[data-mobtoggle]{display:none;}
+@keyframes scZoom{from{transform:scale(1.08);}to{transform:scale(1);}}
+@media (max-width:1080px){
+  [data-navbar]{display:none !important;}
+  [data-headcall]{display:none !important;}
+  [data-mobtoggle]{display:inline-flex !important;}
+}
+@media (max-width:600px){
+  [data-util-left]{display:none !important;}
+}
+</style>
+</helmet>
+<div ref="{{ rootRef }}" onClick="{{ handleClick }}" style="background:#fff;overflow:hidden;">
+
+  <div style="background:#15181b;color:#aeb4ba;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(18px,5vw,40px);height:38px;display:flex;align-items:center;justify-content:space-between;font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;">
+      <div data-util-left style="display:flex;gap:22px;align-items:center;">
+        <span style="color:#ffb300;">ISO 9001:2015 Certified</span>
+        <span style="opacity:.55;">Quotes in 4&ndash;24 hrs</span>
+        <span style="opacity:.55;">Two shifts daily &middot; Phoenix, AZ</span>
+      </div>
+      <div style="display:flex;gap:20px;align-items:center;">
+        <a href="tel:4803067748" style="text-decoration:none;color:#e7eaec;">480&middot;306&middot;7748</a>
+        <a href="http://paynow.aiwyn.ai/SWWJ" target="_blank" rel="noopener" style="text-decoration:none;color:#aeb4ba;">Pay Now &#8599;</a>
+      </div>
+    </div>
+  </div>
+
+  <header ref="{{ headerRef }}" style="position:sticky;top:0;z-index:60;background:rgba(255,255,255,.96);backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid #e6e9eb;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(18px,5vw,40px);height:74px;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+      <a href="#" data-route="home" style="display:flex;align-items:center;flex:0 0 auto;text-decoration:none;">
+        <img src="assets/logo.png" alt="Southwest Waterjet & Laser" style="height:38px;width:auto;" />
+      </a>
+      <nav data-navbar style="display:flex;align-items:center;gap:2px;">
+        <div onMouseEnter="{{ openCaps }}" onMouseLeave="{{ closeCaps }}" style="position:relative;">
+          <a href="#" data-route="capability" data-cap="laser" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:#3a4147;font-weight:600;font-size:14.5px;padding:10px 13px;">Capabilities <span style="font-size:10px;opacity:.6;">&#9662;</span></a>
+          <sc-if value="{{ capsMenu }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;top:100%;left:0;width:330px;background:#fff;border:1px solid #e6e9eb;box-shadow:0 24px 48px -20px rgba(20,23,26,.35);padding:8px;">
+              <sc-for list="{{ capList }}" as="c" hint-placeholder-count="6">
+                <a href="#" data-route="capability" data-cap="{{ c.key }}" style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;text-decoration:none;padding:11px 13px;border-bottom:1px solid #f0f2f3;">
+                  <span style="font-weight:600;font-size:14.5px;color:#14171a;">{{ c.name }}</span>
+                  <span style="font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.04em;color:#9aa1a7;text-transform:uppercase;">{{ c.machine }}</span>
+                </a>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+        <a href="#" data-route="equipment" style="text-decoration:none;color:#3a4147;font-weight:600;font-size:14.5px;padding:10px 13px;">Equipment</a>
+        <a href="#" data-route="materials" style="text-decoration:none;color:#3a4147;font-weight:600;font-size:14.5px;padding:10px 13px;">Materials</a>
+        <a href="#" data-route="industries" style="text-decoration:none;color:#3a4147;font-weight:600;font-size:14.5px;padding:10px 13px;">Industries</a>
+        <a href="#" data-route="quality" style="text-decoration:none;color:#3a4147;font-weight:600;font-size:14.5px;padding:10px 13px;">Quality</a>
+        <a href="#" data-route="resources" style="text-decoration:none;color:#3a4147;font-weight:600;font-size:14.5px;padding:10px 13px;">Resources</a>
+        <a href="#" data-route="about" style="text-decoration:none;color:#3a4147;font-weight:600;font-size:14.5px;padding:10px 13px;">About</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:8px;flex:0 0 auto;">
+        <a href="tel:4803067748" data-headcall style="text-decoration:none;color:#14171a;font-weight:700;font-size:14px;padding:9px 12px;letter-spacing:.01em;">480.306.7748</a>
+        <a href="#" data-route="quote" style="display:inline-flex;align-items:center;gap:8px;background:#ffb300;color:#14171a;font-weight:700;font-size:14px;padding:12px 18px;text-decoration:none;letter-spacing:.01em;">Request a Quote <span style="font-size:15px;">&rarr;</span></a>
+        <button data-mobtoggle onClick="{{ toggleMobile }}" aria-label="Menu" style="align-items:center;justify-content:center;width:42px;height:42px;background:#14171a;color:#fff;border:none;cursor:pointer;font-size:18px;">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <sc-if value="{{ mobileNav }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:70;background:#15181b;color:#fff;padding:24px clamp(18px,5vw,40px);overflow:auto;">
+      <div style="display:flex;align-items:center;justify-content:space-between;height:50px;margin-bottom:18px;">
+        <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;color:#ffb300;text-transform:uppercase;">Menu</span>
+        <button onClick="{{ toggleMobile }}" aria-label="Close" style="width:42px;height:42px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.25);cursor:pointer;font-size:18px;">&times;</button>
+      </div>
+      <div style="display:flex;flex-direction:column;">
+        <sc-for list="{{ mobileLinks }}" as="m" hint-placeholder-count="9">
+          <a href="#" data-route="{{ m.route }}" data-cap="{{ m.cap }}" style="text-decoration:none;color:#fff;font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:700;font-size:22px;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;">{{ m.label }} <span style="color:#ffb300;font-size:16px;">&rarr;</span></a>
+        </sc-for>
+        <a href="#" data-route="quote" style="margin-top:24px;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#ffb300;color:#14171a;font-weight:700;font-size:16px;padding:18px;text-decoration:none;">Request a Quote &rarr;</a>
+        <a href="tel:4803067748" style="margin-top:10px;text-align:center;color:#aeb4ba;text-decoration:none;font-family:'Space Mono',monospace;padding:12px;">Call 480.306.7748</a>
+      </div>
+    </div>
+  </sc-if>
+
+  <main style="min-height:60vh;">
+
+  <!-- ============================= HOME ============================= -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <div>
+    <section style="position:relative;background:#15181b;color:#fff;overflow:hidden;">
+      <img src="assets/hero-tube-laser.webp" alt="Tube laser cutting in progress" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.42;animation:scZoom 1.6s ease-out both;" />
+      <div style="position:absolute;inset:0;background:linear-gradient(100deg,rgba(21,24,27,.94) 0%,rgba(21,24,27,.72) 46%,rgba(21,24,27,.32) 100%);"></div>
+      <div style="position:absolute;left:0;right:0;bottom:0;height:140px;background:linear-gradient(to top,rgba(21,24,27,.9),transparent);"></div>
+      <div style="position:relative;max-width:1280px;margin:0 auto;padding:clamp(70px,11vw,128px) clamp(18px,5vw,40px) clamp(56px,8vw,92px);">
+        <div style="max-width:760px;">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:28px;">
+            <span style="width:36px;height:2px;background:#ffb300;"></span>
+            <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#ffb300;">Phoenix, AZ &middot; Since 2003</span>
+          </div>
+          <h1 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(38px,6.2vw,76px);line-height:.98;letter-spacing:-.015em;margin:0 0 24px;">Precision laser &amp; waterjet cutting, <span style="color:#ffb300;">quoted in hours.</span></h1>
+          <p style="font-size:clamp(16px,1.5vw,20px);line-height:1.55;color:#c8cdd1;max-width:600px;margin:0 0 36px;">A family-owned, ISO 9001:2015 contract manufacturer running Trumpf lasers and the largest waterjet in Arizona. Send a drawing &mdash; get accurate cut and formed parts, fast.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;">
+            <a href="#" data-route="quote" style="display:inline-flex;align-items:center;gap:10px;background:#ffb300;color:#14171a;font-weight:700;font-size:16px;padding:18px 28px;text-decoration:none;">Request a Quote <span style="font-size:17px;">&rarr;</span></a>
+            <a href="#" data-route="capability" data-cap="laser" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#fff;font-weight:600;font-size:16px;padding:18px 26px;text-decoration:none;border:1px solid rgba(255,255,255,.28);">Explore capabilities</a>
+          </div>
+          <div style="margin-top:46px;display:flex;flex-wrap:wrap;gap:10px 26px;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.04em;color:#aeb4ba;text-transform:uppercase;">
+            <span>OMAX 120 waterjet</span><span style="color:#3a4147;">/</span>
+            <span>Up to 8&Prime; steel</span><span style="color:#3a4147;">/</span>
+            <span>&plusmn;0.005&Prime; tolerance</span><span style="color:#3a4147;">/</span>
+            <span>Trumpf tube laser</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#f6f7f8;border-bottom:1px solid #e6e9eb;">
+      <div style="max-width:1280px;margin:0 auto;padding:26px clamp(18px,5vw,40px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:28px;">
+        <div style="display:flex;align-items:center;gap:26px;">
+          <img src="assets/iso.jpg" alt="ISO 9001:2015 Certified Company" style="height:58px;width:auto;" />
+          <img src="assets/ntma.png" alt="NTMA Member" style="height:42px;width:auto;" />
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:26px 44px;">
+          <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+            <div>
+              <div style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:26px;line-height:1;color:#14171a;">{{ s.k }}</div>
+              <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#6c757d;margin-top:6px;">{{ s.l }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#fff;padding:clamp(64px,9vw,116px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;">
+        <div data-reveal style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap;margin-bottom:54px;">
+          <div style="max-width:620px;">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;"><span style="width:28px;height:2px;background:#ffb300;"></span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#b8830d;">What we do</span></div>
+            <h2 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(30px,4.2vw,52px);line-height:1.02;letter-spacing:-.01em;margin:0;">Six ways we cut and form metal.</h2>
+          </div>
+          <p style="max-width:380px;color:#5d666e;font-size:16px;line-height:1.6;margin:0;">One shop for cutting, forming, inspection, and material. Click any capability for real specs.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1px;background:#e6e9eb;border:1px solid #e6e9eb;">
+          <sc-for list="{{ capList }}" as="c" hint-placeholder-count="6">
+            <a href="#" data-route="capability" data-cap="{{ c.key }}" data-reveal style="background:#fff;padding:36px 32px 30px;text-decoration:none;display:flex;flex-direction:column;gap:14px;position:relative;transition:background .25s;" onMouseEnter="{{ cardEnter }}" onMouseLeave="{{ cardLeave }}">
+              <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#ffb300;transform:scaleX(0);transform-origin:left;transition:transform .3s;" data-cardbar></div>
+              <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.1em;color:#b8830d;">{{ c.num }}</span>
+              <h3 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:700;font-size:23px;line-height:1.05;margin:0;color:#14171a;">{{ c.name }}</h3>
+              <p style="color:#5d666e;font-size:14.5px;line-height:1.55;margin:0;flex:1;">{{ c.blurb }}</p>
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding-top:16px;border-top:1px solid #eef0f1;">
+                <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#9aa1a7;">{{ c.machine }}</span>
+                <span style="color:#14171a;font-weight:700;font-size:14px;">&rarr;</span>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#15181b;color:#fff;padding:clamp(64px,9vw,116px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(36px,5vw,72px);align-items:center;">
+        <div data-reveal style="position:relative;">
+          <img src="assets/trulaser-2030.webp" alt="Trumpf TruLaser 2030 fiber laser" style="width:100%;height:clamp(300px,38vw,480px);object-fit:cover;" />
+          <div style="position:absolute;left:0;bottom:0;background:#ffb300;color:#14171a;padding:14px 20px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;">Trumpf TruLaser 2030</div>
+        </div>
+        <div data-reveal>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;"><span style="width:28px;height:2px;background:#ffb300;"></span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#ffb300;">The floor</span></div>
+          <h2 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(28px,3.6vw,46px);line-height:1.04;letter-spacing:-.01em;margin:0 0 20px;">Trumpf &amp; OMAX iron, run by factory-trained operators.</h2>
+          <p style="color:#c8cdd1;font-size:16px;line-height:1.6;margin:0 0 30px;max-width:520px;">The first Trumpf tube laser in Arizona, multiple fiber flat lasers, a TruBend press brake, and the largest waterjet in the state &mdash; under one roof.</p>
+          <div style="display:flex;flex-direction:column;border-top:1px solid rgba(255,255,255,.12);">
+            <sc-for list="{{ equipHighlights }}" as="e" hint-placeholder-count="4">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.12);">
+                <span style="font-weight:600;font-size:16px;color:#fff;">{{ e.name }}</span>
+                <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.04em;color:#aeb4ba;text-align:right;">{{ e.spec }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <a href="#" data-route="equipment" style="display:inline-flex;align-items:center;gap:10px;margin-top:30px;color:#ffb300;font-weight:700;font-size:15px;text-decoration:none;border-bottom:1px solid rgba(255,179,0,.4);padding-bottom:3px;">See all equipment &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#fff;padding:clamp(64px,9vw,116px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(36px,5vw,64px);align-items:center;">
+        <div data-reveal>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;"><span style="width:28px;height:2px;background:#ffb300;"></span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#b8830d;">Materials</span></div>
+          <h2 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(28px,3.8vw,48px);line-height:1.02;letter-spacing:-.01em;margin:0 0 20px;">From carbon steel to carbon fiber.</h2>
+          <p style="color:#5d666e;font-size:16px;line-height:1.6;margin:0 0 28px;max-width:500px;">Metals, exotic alloys, stone, glass, and composites. If it can be cut, chances are we cut it &mdash; with no heat-affected zone on the waterjet.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:9px;margin-bottom:30px;">
+            <sc-for list="{{ materialChips }}" as="m" hint-placeholder-count="14">
+              <span style="border:1px solid #d9dde0;padding:9px 15px;font-size:13.5px;font-weight:500;color:#3a4147;">{{ m }}</span>
+            </sc-for>
+          </div>
+          <a href="#" data-route="materials" style="display:inline-flex;align-items:center;gap:10px;color:#14171a;font-weight:700;font-size:15px;text-decoration:none;border-bottom:2px solid #ffb300;padding-bottom:3px;">Browse all materials &rarr;</a>
+        </div>
+        <div data-reveal style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <img src="assets/waterjet-bed.webp" alt="Waterjet cutting bed" style="width:100%;height:230px;object-fit:cover;grid-column:1 / -1;" />
+          <img src="assets/tube-parts.jpg" alt="Cut stainless tube" style="width:100%;height:180px;object-fit:cover;" />
+          <img src="assets/foam-parts.jpg" alt="Waterjet-cut foam profiles" style="width:100%;height:180px;object-fit:cover;" />
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#f6f7f8;padding:clamp(64px,9vw,116px) clamp(18px,5vw,40px);border-top:1px solid #e6e9eb;border-bottom:1px solid #e6e9eb;">
+      <div style="max-width:1280px;margin:0 auto;">
+        <div data-reveal style="text-align:center;max-width:640px;margin:0 auto 56px;">
+          <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:18px;"><span style="width:28px;height:2px;background:#ffb300;"></span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#b8830d;">How it works</span></div>
+          <h2 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(28px,3.8vw,48px);line-height:1.02;letter-spacing:-.01em;margin:0;">From drawing to delivered, in four steps.</h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:#e0e4e6;border:1px solid #e0e4e6;">
+          <sc-for list="{{ process }}" as="p" hint-placeholder-count="4">
+            <div data-reveal style="background:#fff;padding:34px 28px;display:flex;flex-direction:column;gap:14px;">
+              <span style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:38px;color:#ffb300;line-height:1;">{{ p.n }}</span>
+              <h3 style="font-weight:700;font-size:19px;margin:0;color:#14171a;">{{ p.t }}</h3>
+              <p style="color:#5d666e;font-size:14.5px;line-height:1.55;margin:0;">{{ p.d }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#fff;padding:clamp(64px,9vw,116px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;">
+        <div data-reveal style="display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap;margin-bottom:46px;">
+          <div style="max-width:600px;">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;"><span style="width:28px;height:2px;background:#ffb300;"></span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#b8830d;">Industries</span></div>
+            <h2 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(28px,3.8vw,48px);line-height:1.02;letter-spacing:-.01em;margin:0;">Trusted across demanding industries.</h2>
+          </div>
+          <a href="#" data-route="industries" style="display:inline-flex;align-items:center;gap:10px;color:#14171a;font-weight:700;font-size:15px;text-decoration:none;border-bottom:2px solid #ffb300;padding-bottom:3px;">All industries &rarr;</a>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:#e6e9eb;border:1px solid #e6e9eb;">
+          <sc-for list="{{ industriesShort }}" as="i" hint-placeholder-count="8">
+            <div style="background:#fff;padding:26px 24px;display:flex;align-items:center;gap:14px;">
+              <span style="width:8px;height:8px;background:#ffb300;flex:0 0 auto;"></span>
+              <span style="font-weight:600;font-size:16px;color:#14171a;">{{ i }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#14171a;color:#fff;padding:clamp(52px,7vw,90px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:30px;">
+        <div style="max-width:640px;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;"><span style="width:28px;height:2px;background:#ffb300;"></span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#ffb300;">Ready when you are</span></div>
+          <h2 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(26px,3.4vw,44px);line-height:1.04;letter-spacing:-.01em;margin:0 0 14px;">Have a drawing? Get a quote in 4&ndash;24 hours.</h2>
+          <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.06em;color:#7c858c;text-transform:uppercase;margin:0;">STEP &middot; IGES &middot; DXF &middot; DWG &middot; STL &middot; SLDPRT &middot; SAT &middot; AI &middot; EPS &middot; PDF</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:13px;">
+          <a href="#" data-route="quote" style="display:inline-flex;align-items:center;gap:10px;background:#ffb300;color:#14171a;font-weight:700;font-size:16px;padding:18px 28px;text-decoration:none;">Request a Quote <span>&rarr;</span></a>
+          <a href="tel:4803067748" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#fff;font-weight:600;font-size:16px;padding:18px 26px;text-decoration:none;border:1px solid rgba(255,255,255,.28);">Call 480.306.7748</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+  </sc-if>
+
+  <!-- ============================= CAPABILITY ============================= -->
+  <sc-if value="{{ isCapability }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <section style="background:#15181b;color:#fff;padding:clamp(40px,6vw,68px) clamp(18px,5vw,40px) 0;">
+      <div style="max-width:1280px;margin:0 auto;">
+        <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9aa1a7;margin-bottom:30px;"><a href="#" data-route="home" style="color:#9aa1a7;text-decoration:none;">Home</a> &nbsp;/&nbsp; Capabilities &nbsp;/&nbsp; <span style="color:#ffb300;">{{ cap.name }}</span></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(32px,5vw,64px);align-items:center;padding-bottom:clamp(40px,6vw,68px);">
+          <div>
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;"><span style="width:28px;height:2px;background:#ffb300;"></span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#ffb300;">{{ cap.kicker }}</span></div>
+            <h1 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(34px,5vw,62px);line-height:1;letter-spacing:-.015em;margin:0 0 22px;">{{ cap.name }}</h1>
+            <p style="color:#c8cdd1;font-size:clamp(16px,1.5vw,19px);line-height:1.6;margin:0 0 32px;max-width:540px;">{{ cap.lead }}</p>
+            <div style="display:flex;flex-wrap:wrap;gap:13px;">
+              <a href="#" data-route="quote" style="display:inline-flex;align-items:center;gap:10px;background:#ffb300;color:#14171a;font-weight:700;font-size:15px;padding:16px 24px;text-decoration:none;">Request a Quote <span>&rarr;</span></a>
+              <a href="tel:4803067748" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#fff;font-weight:600;font-size:15px;padding:16px 22px;text-decoration:none;border:1px solid rgba(255,255,255,.28);">Call 480.306.7748</a>
+            </div>
+          </div>
+          <div style="position:relative;">
+            <img src="{{ cap.img }}" alt="{{ cap.name }}" style="width:100%;height:clamp(280px,34vw,420px);object-fit:cover;" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#fff;padding:clamp(56px,8vw,104px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(40px,6vw,80px);">
+        <div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;"><span style="width:28px;height:2px;background:#ffb300;"></span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#b8830d;">Specifications</span></div>
+          <div style="border-top:2px solid #14171a;">
+            <sc-for list="{{ cap.specs }}" as="s" hint-placeholder-count="5">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:16px 0;border-bottom:1px solid #e6e9eb;">
+                <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#6c757d;">{{ s.k }}</span>
+                <span style="font-weight:700;font-size:16px;color:#14171a;text-align:right;">{{ s.v }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;"><span style="width:28px;height:2px;background:#ffb300;"></span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#b8830d;">Why it works</span></div>
+          <div style="display:flex;flex-direction:column;gap:18px;">
+            <sc-for list="{{ cap.features }}" as="f" hint-placeholder-count="4">
+              <div style="display:flex;gap:14px;align-items:flex-start;">
+                <span style="width:9px;height:9px;background:#ffb300;flex:0 0 auto;margin-top:7px;"></span>
+                <span style="font-size:16.5px;line-height:1.5;color:#2a3036;">{{ f }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <sc-if value="{{ cap.hasMachines }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:36px;padding-top:30px;border-top:1px solid #e6e9eb;">
+              <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#9aa1a7;margin-bottom:16px;">Machines</div>
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <sc-for list="{{ cap.machines }}" as="mc" hint-placeholder-count="3">
+                  <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;background:#f6f7f8;padding:14px 18px;">
+                    <span style="font-weight:700;font-size:15px;color:#14171a;">{{ mc.name }}</span>
+                    <span style="font-family:'Space Mono',monospace;font-size:12px;color:#6c757d;text-align:right;">{{ mc.detail }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#f6f7f8;padding:clamp(48px,6vw,80px) clamp(18px,5vw,40px);border-top:1px solid #e6e9eb;">
+      <div style="max-width:1280px;margin:0 auto;">
+        <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#b8830d;margin-bottom:22px;">Other capabilities</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:#e0e4e6;border:1px solid #e0e4e6;">
+          <sc-for list="{{ capLinks }}" as="c" hint-placeholder-count="6">
+            <a href="#" data-route="capability" data-cap="{{ c.key }}" style="background:{{ c.bg }};padding:22px 20px;text-decoration:none;display:flex;flex-direction:column;gap:8px;">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;color:{{ c.muted }};text-transform:uppercase;">{{ c.machine }}</span>
+              <span style="font-weight:700;font-size:16px;color:{{ c.fg }};">{{ c.name }}</span>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:#14171a;color:#fff;padding:clamp(52px,7vw,90px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:30px;">
+        <div style="max-width:640px;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;"><span style="width:28px;height:2px;background:#ffb300;"></span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#ffb300;">Ready when you are</span></div>
+          <h2 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(26px,3.4vw,44px);line-height:1.04;letter-spacing:-.01em;margin:0 0 14px;">Have a drawing? Get a quote in 4&ndash;24 hours.</h2>
+          <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.06em;color:#7c858c;text-transform:uppercase;margin:0;">STEP &middot; IGES &middot; DXF &middot; DWG &middot; STL &middot; SLDPRT &middot; SAT &middot; AI &middot; EPS &middot; PDF</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:13px;">
+          <a href="#" data-route="quote" style="display:inline-flex;align-items:center;gap:10px;background:#ffb300;color:#14171a;font-weight:700;font-size:16px;padding:18px 28px;text-decoration:none;">Request a Quote <span>&rarr;</span></a>
+          <a href="tel:4803067748" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#fff;font-weight:600;font-size:16px;padding:18px 26px;text-decoration:none;border:1px solid rgba(255,255,255,.28);">Call 480.306.7748</a>
+        </div>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <!-- ============================= QUOTE ============================= -->
+  <sc-if value="{{ isQuote }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <section style="background:#15181b;color:#fff;padding:clamp(44px,6vw,76px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;"><span style="width:28px;height:2px;background:#ffb300;"></span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#ffb300;">Request a Quote</span></div>
+        <h1 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(32px,4.6vw,58px);line-height:1;letter-spacing:-.015em;margin:0 0 18px;max-width:780px;">Send your drawing. Get pricing in 4&ndash;24 hours.</h1>
+        <p style="color:#c8cdd1;font-size:clamp(16px,1.4vw,18px);line-height:1.55;margin:0;max-width:600px;">Upload CAD files or a PDF, tell us material and quantity, and our team will get back fast with accurate pricing and lead time.</p>
+      </div>
+    </section>
+
+    <section style="background:#f6f7f8;padding:clamp(40px,6vw,76px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,4vw,52px);align-items:start;">
+
+        <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#fff;border:1px solid #e6e9eb;padding:clamp(34px,5vw,64px);">
+            <div style="width:56px;height:56px;background:#ffb300;display:flex;align-items:center;justify-content:center;font-size:30px;color:#14171a;margin-bottom:26px;">&checkmark;</div>
+            <h2 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(26px,3vw,38px);line-height:1.05;margin:0 0 16px;">Quote request received.</h2>
+            <p style="color:#5d666e;font-size:16.5px;line-height:1.6;margin:0 0 14px;max-width:520px;">Thanks &mdash; we&rsquo;ve got your details{{ filesNote }}. A member of our team will review and reply with pricing and lead time, typically within 4&ndash;24 hours.</p>
+            <p style="color:#5d666e;font-size:16.5px;line-height:1.6;margin:0 0 30px;">Need it sooner? Call <a href="tel:4803067748" style="color:#14171a;font-weight:700;">480.306.7748</a> for expedited service.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:12px;">
+              <button onClick="{{ resetForm }}" style="background:#14171a;color:#fff;border:none;font-weight:700;font-size:15px;padding:15px 24px;cursor:pointer;">Submit another request</button>
+              <a href="#" data-route="home" style="display:inline-flex;align-items:center;padding:15px 24px;text-decoration:none;color:#14171a;font-weight:700;font-size:15px;border:1px solid #cdd2d6;">Back to home</a>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+          <form onSubmit="{{ submitForm }}" style="background:#fff;border:1px solid #e6e9eb;padding:clamp(26px,3.5vw,44px);">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;">
+              <label style="display:block;">
+                <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6c757d;margin-bottom:8px;">Name *</span>
+                <input name="name" value="{{ form.name }}" onInput="{{ handleField }}" placeholder="Your name" style="{{ inputStyleName }}" />
+                <sc-if value="{{ errName }}" hint-placeholder-val="{{ false }}"><span style="display:block;color:#c0392b;font-size:12.5px;margin-top:6px;">{{ errName }}</span></sc-if>
+              </label>
+              <label style="display:block;">
+                <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6c757d;margin-bottom:8px;">Company</span>
+                <input name="company" value="{{ form.company }}" onInput="{{ handleField }}" placeholder="Company name" style="{{ inputStyleBase }}" />
+              </label>
+              <label style="display:block;">
+                <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6c757d;margin-bottom:8px;">Email *</span>
+                <input name="email" value="{{ form.email }}" onInput="{{ handleField }}" placeholder="you@company.com" style="{{ inputStyleEmail }}" />
+                <sc-if value="{{ errEmail }}" hint-placeholder-val="{{ false }}"><span style="display:block;color:#c0392b;font-size:12.5px;margin-top:6px;">{{ errEmail }}</span></sc-if>
+              </label>
+              <label style="display:block;">
+                <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6c757d;margin-bottom:8px;">Phone</span>
+                <input name="phone" value="{{ form.phone }}" onInput="{{ handleField }}" placeholder="(480) 000-0000" style="{{ inputStyleBase }}" />
+              </label>
+              <label style="display:block;">
+                <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6c757d;margin-bottom:8px;">Service</span>
+                <select name="service" value="{{ form.service }}" onChange="{{ handleField }}" style="{{ selectStyle }}">
+                  <option value="">Select a service&hellip;</option>
+                  <sc-for list="{{ serviceOptions }}" as="o" hint-placeholder-count="7"><option value="{{ o }}">{{ o }}</option></sc-for>
+                </select>
+              </label>
+              <label style="display:block;">
+                <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6c757d;margin-bottom:8px;">Material</span>
+                <input name="material" value="{{ form.material }}" onInput="{{ handleField }}" placeholder="e.g. 304 stainless, 0.125&Prime;" style="{{ inputStyleBase }}" />
+              </label>
+              <label style="display:block;">
+                <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6c757d;margin-bottom:8px;">Quantity</span>
+                <input name="qty" value="{{ form.qty }}" onInput="{{ handleField }}" placeholder="e.g. 50 pcs" style="{{ inputStyleBase }}" />
+              </label>
+              <label style="display:block;">
+                <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6c757d;margin-bottom:8px;">Need by</span>
+                <input name="date" value="{{ form.date }}" onInput="{{ handleField }}" placeholder="Target date" style="{{ inputStyleBase }}" />
+              </label>
+            </div>
+
+            <label style="display:block;margin-top:20px;">
+              <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6c757d;margin-bottom:8px;">Project details *</span>
+              <textarea name="details" value="{{ form.details }}" onInput="{{ handleField }}" rows="4" placeholder="Tell us about the part, tolerances, finishing, and anything else we should know." style="{{ textareaStyle }}"></textarea>
+              <sc-if value="{{ errDetails }}" hint-placeholder-val="{{ false }}"><span style="display:block;color:#c0392b;font-size:12.5px;margin-top:6px;">{{ errDetails }}</span></sc-if>
+            </label>
+
+            <div style="margin-top:24px;">
+              <span style="display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6c757d;margin-bottom:8px;">CAD files &amp; drawings</span>
+              <div onClick="{{ openFilePicker }}" onDrop="{{ onDrop }}" onDragOver="{{ onDragOver }}" onDragLeave="{{ onDragLeave }}" style="{{ dropStyle }}">
+                <input ref="{{ fileInputRef }}" type="file" multiple accept=".pdf,.step,.stp,.iges,.igs,.dxf,.dwg,.stl,.sld,.sldprt,.sat,.ai,.eps,.model" onChange="{{ onFileInput }}" style="display:none;" />
+                <div style="font-size:30px;color:#b8830d;margin-bottom:10px;">&#8682;</div>
+                <div style="font-weight:700;font-size:16px;color:#14171a;margin-bottom:6px;">Drop files here or click to browse</div>
+                <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.04em;color:#9aa1a7;text-transform:uppercase;">STEP &middot; IGES &middot; DXF &middot; DWG &middot; STL &middot; SLDPRT &middot; SAT &middot; AI &middot; EPS &middot; PDF</div>
+              </div>
+              <sc-if value="{{ hasFiles }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;gap:8px;margin-top:14px;">
+                  <sc-for list="{{ fileList }}" as="f" hint-placeholder-count="2">
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;background:#f6f7f8;border:1px solid #e6e9eb;padding:11px 14px;">
+                      <div style="display:flex;align-items:center;gap:12px;min-width:0;">
+                        <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.06em;background:#14171a;color:#fff;padding:4px 7px;text-transform:uppercase;flex:0 0 auto;">{{ f.ext }}</span>
+                        <span style="font-size:14px;color:#14171a;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ f.name }}</span>
+                        <span style="font-family:'Space Mono',monospace;font-size:11px;color:#9aa1a7;flex:0 0 auto;">{{ f.size }}</span>
+                      </div>
+                      <button type="button" data-idx="{{ f.idx }}" onClick="{{ removeFile }}" aria-label="Remove" style="background:transparent;border:none;color:#9aa1a7;font-size:18px;cursor:pointer;line-height:1;flex:0 0 auto;">&times;</button>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+
+            <button type="submit" style="margin-top:28px;width:100%;display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#ffb300;color:#14171a;border:none;font-weight:800;font-size:16px;padding:19px;cursor:pointer;letter-spacing:.01em;">Submit Quote Request <span style="font-size:17px;">&rarr;</span></button>
+            <p style="text-align:center;color:#9aa1a7;font-size:12.5px;margin:14px 0 0;">By submitting you agree to be contacted about your request. Files stay confidential.</p>
+          </form>
+        </sc-if>
+
+        <aside style="position:sticky;top:96px;display:flex;flex-direction:column;gap:18px;">
+          <div style="background:#15181b;color:#fff;padding:30px 28px;">
+            <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#ffb300;margin-bottom:18px;">What to include</div>
+            <div style="display:flex;flex-direction:column;gap:13px;">
+              <sc-for list="{{ quoteTips }}" as="t" hint-placeholder-count="4">
+                <div style="display:flex;gap:12px;align-items:flex-start;"><span style="width:8px;height:8px;background:#ffb300;flex:0 0 auto;margin-top:6px;"></span><span style="font-size:14.5px;line-height:1.5;color:#d4d8db;">{{ t }}</span></div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="background:#fff;border:1px solid #e6e9eb;padding:26px 28px;">
+            <div style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:22px;margin-bottom:6px;">Prefer to talk?</div>
+            <p style="color:#5d666e;font-size:14.5px;line-height:1.5;margin:0 0 16px;">Call our shop directly &mdash; we&rsquo;re here five days a week, two shifts a day.</p>
+            <a href="tel:4803067748" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#14171a;color:#fff;text-decoration:none;font-weight:700;font-size:16px;padding:14px;">480.306.7748</a>
+          </div>
+          <div style="background:#fff;border:1px solid #e6e9eb;padding:22px 28px;display:flex;align-items:center;gap:18px;">
+            <img src="assets/iso.jpg" alt="ISO 9001:2015" style="height:48px;width:auto;" />
+            <span style="font-size:13.5px;line-height:1.45;color:#5d666e;">ISO 9001:2015 certified &mdash; documented, repeatable quality on every job.</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <!-- ============================= EQUIPMENT ============================= -->
+  <sc-if value="{{ isEquipment }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <section style="background:#f6f7f8;border-bottom:1px solid #e6e9eb;padding:clamp(40px,6vw,72px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;">
+        <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9aa1a7;margin-bottom:22px;"><a href="#" data-route="home" style="color:#9aa1a7;text-decoration:none;">Home</a> &nbsp;/&nbsp; <span style="color:#b8830d;">Equipment</span></div>
+        <h1 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(34px,5vw,60px);line-height:1;letter-spacing:-.015em;margin:0 0 18px;max-width:840px;">The equipment behind the parts.</h1>
+        <p style="color:#5d666e;font-size:clamp(16px,1.4vw,19px);line-height:1.6;margin:0;max-width:640px;">Trumpf lasers and the largest waterjet in Arizona, run by factory-trained, certified operators across two shifts a day.</p>
+      </div>
+    </section>
+    <section style="background:#fff;padding:clamp(48px,7vw,96px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1px;background:#e6e9eb;border:1px solid #e6e9eb;">
+        <sc-for list="{{ equipment }}" as="e" hint-placeholder-count="7">
+          <div data-reveal style="background:#fff;display:flex;flex-direction:column;">
+            <sc-if value="{{ e.hasImg }}" hint-placeholder-val="{{ true }}">
+              <div style="position:relative;height:210px;overflow:hidden;background:#15181b;">
+                <img src="{{ e.img }}" alt="{{ e.name }}" style="width:100%;height:100%;object-fit:cover;" />
+                <sc-if value="{{ e.tag }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:0;left:0;background:#ffb300;color:#14171a;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;padding:7px 12px;">{{ e.tag }}</span></sc-if>
+              </div>
+            </sc-if>
+            <sc-if value="{{ e.noImg }}" hint-placeholder-val="{{ false }}">
+              <div style="position:relative;height:210px;background:#15181b;display:flex;align-items:center;justify-content:center;">
+                <span style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:22px;color:#2f353b;letter-spacing:.04em;">TRUMPF</span>
+                <sc-if value="{{ e.tag }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:0;left:0;background:#ffb300;color:#14171a;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;padding:7px 12px;">{{ e.tag }}</span></sc-if>
+              </div>
+            </sc-if>
+            <div style="padding:26px 26px 28px;display:flex;flex-direction:column;flex:1;">
+              <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#b8830d;margin-bottom:10px;">{{ e.type }}</span>
+              <h3 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:700;font-size:21px;line-height:1.08;margin:0 0 16px;color:#14171a;">{{ e.name }}</h3>
+              <div style="display:flex;flex-direction:column;gap:9px;border-top:1px solid #eef0f1;padding-top:16px;">
+                <sc-for list="{{ e.specs }}" as="sp" hint-placeholder-count="3">
+                  <div style="display:flex;gap:11px;align-items:flex-start;"><span style="width:7px;height:7px;background:#ffb300;flex:0 0 auto;margin-top:6px;"></span><span style="font-size:14px;line-height:1.45;color:#3a4147;">{{ sp }}</span></div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+    <section style="background:#14171a;color:#fff;padding:clamp(52px,7vw,90px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:30px;">
+        <div style="max-width:640px;"><div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;"><span style="width:28px;height:2px;background:#ffb300;"></span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#ffb300;">Ready when you are</span></div><h2 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(26px,3.4vw,44px);line-height:1.04;letter-spacing:-.01em;margin:0;">Put this iron to work on your next job.</h2></div>
+        <div style="display:flex;flex-wrap:wrap;gap:13px;"><a href="#" data-route="quote" style="display:inline-flex;align-items:center;gap:10px;background:#ffb300;color:#14171a;font-weight:700;font-size:16px;padding:18px 28px;text-decoration:none;">Request a Quote <span>&rarr;</span></a><a href="tel:4803067748" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#fff;font-weight:600;font-size:16px;padding:18px 26px;text-decoration:none;border:1px solid rgba(255,255,255,.28);">Call 480.306.7748</a></div>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <!-- ============================= MATERIALS ============================= -->
+  <sc-if value="{{ isMaterials }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <section style="background:#f6f7f8;border-bottom:1px solid #e6e9eb;padding:clamp(40px,6vw,72px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;">
+        <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9aa1a7;margin-bottom:22px;"><a href="#" data-route="home" style="color:#9aa1a7;text-decoration:none;">Home</a> &nbsp;/&nbsp; <span style="color:#b8830d;">Materials</span></div>
+        <h1 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(34px,5vw,60px);line-height:1;letter-spacing:-.015em;margin:0 0 18px;max-width:840px;">Materials we cut.</h1>
+        <p style="color:#5d666e;font-size:clamp(16px,1.4vw,19px);line-height:1.6;margin:0;max-width:660px;">From everyday metals to exotic alloys, stone, glass, and composites. Our waterjet cuts virtually anything with no heat-affected zone &mdash; our lasers handle sheet and tube at speed.</p>
+      </div>
+    </section>
+    <section style="background:#fff;padding:clamp(40px,6vw,84px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-bottom:30px;">
+          <div style="display:flex;flex-wrap:wrap;gap:9px;">
+            <sc-for list="{{ matFilters }}" as="ft" hint-placeholder-count="4">
+              <button data-filter="{{ ft.key }}" onClick="{{ setFilter }}" style="border:1px solid {{ ft.bd }};background:{{ ft.bg }};color:{{ ft.fg }};font-weight:600;font-size:13.5px;padding:10px 17px;cursor:pointer;">{{ ft.label }}</button>
+            </sc-for>
+          </div>
+          <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9aa1a7;">{{ matCount }} materials</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1px;background:#e6e9eb;border:1px solid #e6e9eb;">
+          <sc-for list="{{ matView }}" as="m" hint-placeholder-count="21">
+            <div style="background:#fff;padding:24px 22px;display:flex;flex-direction:column;gap:8px;">
+              <span style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:700;font-size:18px;color:#14171a;line-height:1.1;">{{ m.name }}</span>
+              <span style="font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#9aa1a7;">{{ m.cat }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="margin-top:32px;background:#f6f7f8;border:1px solid #e6e9eb;border-left:3px solid #ffb300;padding:22px 26px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;">
+          <p style="margin:0;font-size:15.5px;color:#3a4147;line-height:1.5;max-width:680px;">Don&rsquo;t see your material? We likely cut it. We also sell sheet stock and can cut to size with your job.</p>
+          <a href="#" data-route="quote" style="display:inline-flex;align-items:center;gap:9px;background:#14171a;color:#fff;font-weight:700;font-size:14px;padding:13px 20px;text-decoration:none;white-space:nowrap;">Ask about your material &rarr;</a>
+        </div>
+      </div>
+    </section>
+    <section style="background:#14171a;color:#fff;padding:clamp(52px,7vw,90px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:30px;">
+        <div style="max-width:640px;"><div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;"><span style="width:28px;height:2px;background:#ffb300;"></span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#ffb300;">Ready when you are</span></div><h2 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(26px,3.4vw,44px);line-height:1.04;letter-spacing:-.01em;margin:0;">Send a drawing &mdash; we&rsquo;ll cut your material, fast.</h2></div>
+        <div style="display:flex;flex-wrap:wrap;gap:13px;"><a href="#" data-route="quote" style="display:inline-flex;align-items:center;gap:10px;background:#ffb300;color:#14171a;font-weight:700;font-size:16px;padding:18px 28px;text-decoration:none;">Request a Quote <span>&rarr;</span></a><a href="tel:4803067748" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#fff;font-weight:600;font-size:16px;padding:18px 26px;text-decoration:none;border:1px solid rgba(255,255,255,.28);">Call 480.306.7748</a></div>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <!-- ============================= INDUSTRIES ============================= -->
+  <sc-if value="{{ isIndustries }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <section style="background:#f6f7f8;border-bottom:1px solid #e6e9eb;padding:clamp(40px,6vw,72px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;">
+        <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9aa1a7;margin-bottom:22px;"><a href="#" data-route="home" style="color:#9aa1a7;text-decoration:none;">Home</a> &nbsp;/&nbsp; <span style="color:#b8830d;">Industries</span></div>
+        <h1 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(34px,5vw,60px);line-height:1;letter-spacing:-.015em;margin:0 0 18px;max-width:840px;">Industries we serve.</h1>
+        <p style="color:#5d666e;font-size:clamp(16px,1.4vw,19px);line-height:1.6;margin:0;max-width:640px;">Engineers and OEMs across demanding sectors rely on our cutting, forming, and inspection &mdash; from flight-critical aerospace to architectural detail.</p>
+      </div>
+    </section>
+    <section style="background:#fff;padding:clamp(48px,7vw,96px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:#e6e9eb;border:1px solid #e6e9eb;">
+        <sc-for list="{{ industries }}" as="i" hint-placeholder-count="10">
+          <div data-reveal style="background:#fff;padding:32px 30px;display:flex;flex-direction:column;gap:12px;">
+            <span style="width:32px;height:3px;background:#ffb300;"></span>
+            <h3 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:700;font-size:21px;line-height:1.08;margin:0;color:#14171a;">{{ i.name }}</h3>
+            <p style="color:#5d666e;font-size:14.5px;line-height:1.55;margin:0;">{{ i.blurb }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+    <section style="background:#14171a;color:#fff;padding:clamp(52px,7vw,90px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:30px;">
+        <div style="max-width:640px;"><div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;"><span style="width:28px;height:2px;background:#ffb300;"></span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#ffb300;">Ready when you are</span></div><h2 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(26px,3.4vw,44px);line-height:1.04;letter-spacing:-.01em;margin:0;">Whatever you build, we can cut it.</h2></div>
+        <div style="display:flex;flex-wrap:wrap;gap:13px;"><a href="#" data-route="quote" style="display:inline-flex;align-items:center;gap:10px;background:#ffb300;color:#14171a;font-weight:700;font-size:16px;padding:18px 28px;text-decoration:none;">Request a Quote <span>&rarr;</span></a><a href="tel:4803067748" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#fff;font-weight:600;font-size:16px;padding:18px 26px;text-decoration:none;border:1px solid rgba(255,255,255,.28);">Call 480.306.7748</a></div>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <!-- ============================= QUALITY ============================= -->
+  <sc-if value="{{ isQuality }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <section style="background:#15181b;color:#fff;padding:clamp(44px,6vw,76px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;">
+        <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9aa1a7;margin-bottom:22px;"><a href="#" data-route="home" style="color:#9aa1a7;text-decoration:none;">Home</a> &nbsp;/&nbsp; <span style="color:#ffb300;">Quality</span></div>
+        <h1 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(34px,5vw,60px);line-height:1;letter-spacing:-.015em;margin:0 0 18px;max-width:840px;">Quality you can document.</h1>
+        <p style="color:#c8cdd1;font-size:clamp(16px,1.4vw,19px);line-height:1.6;margin:0;max-width:660px;">ISO 9001:2015 certified and NTMA members. Every job is run by factory-trained operators and backed by in-process 2D inspection.</p>
+      </div>
+    </section>
+    <section style="background:#fff;padding:clamp(48px,7vw,96px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(40px,6vw,72px);align-items:start;">
+        <div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px;"><span style="width:28px;height:2px;background:#ffb300;"></span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#b8830d;">Our commitment</span></div>
+          <div style="display:flex;flex-direction:column;gap:24px;">
+            <sc-for list="{{ qualityPoints }}" as="qp" hint-placeholder-count="4">
+              <div style="border-top:1px solid #e6e9eb;padding-top:20px;">
+                <h3 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:700;font-size:20px;margin:0 0 8px;color:#14171a;">{{ qp.t }}</h3>
+                <p style="color:#5d666e;font-size:15.5px;line-height:1.6;margin:0;">{{ qp.d }}</p>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;position:sticky;top:96px;">
+          <div style="background:#f6f7f8;border:1px solid #e6e9eb;padding:34px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;">
+            <img src="assets/iso.jpg" alt="ISO 9001:2015 Certified Company" style="height:120px;width:auto;" />
+            <div style="font-weight:700;font-size:17px;color:#14171a;">ISO 9001:2015 Certified</div>
+            <p style="margin:0;font-size:14px;color:#5d666e;line-height:1.5;">A documented, audited quality management system across every process.</p>
+          </div>
+          <div style="background:#f6f7f8;border:1px solid #e6e9eb;padding:28px;display:flex;align-items:center;gap:20px;">
+            <img src="assets/ntma.png" alt="NTMA Member" style="height:52px;width:auto;flex:0 0 auto;" />
+            <span style="font-size:14px;color:#5d666e;line-height:1.5;">Proud member of the National Tooling & Machining Association.</span>
+          </div>
+          <div style="background:#14171a;color:#fff;padding:28px;">
+            <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#ffb300;margin-bottom:16px;">Downloads</div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <a href="assets/downloads/swwj-line-card.pdf" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid rgba(255,255,255,.16);padding:14px 16px;text-decoration:none;color:#fff;font-weight:600;font-size:14.5px;">Capabilities Line Card <span style="color:#ffb300;font-family:'Space Mono',monospace;font-size:12px;">PDF &darr;</span></a>
+              <a href="assets/downloads/swwj-info-sheet.pdf" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid rgba(255,255,255,.16);padding:14px 16px;text-decoration:none;color:#fff;font-weight:600;font-size:14.5px;">Company Info Sheet <span style="color:#ffb300;font-family:'Space Mono',monospace;font-size:12px;">PDF &darr;</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section style="background:#f6f7f8;border-top:1px solid #e6e9eb;padding:clamp(48px,7vw,90px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;">
+        <h2 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(26px,3.4vw,42px);line-height:1.02;letter-spacing:-.01em;margin:0 0 36px;text-align:center;">Understand. Deliver. Improve.</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:#e0e4e6;border:1px solid #e0e4e6;">
+          <sc-for list="{{ values }}" as="v" hint-placeholder-count="3">
+            <div style="background:#fff;padding:34px 30px;"><div style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:24px;color:#ffb300;margin-bottom:12px;">{{ v.t }}</div><p style="color:#5d666e;font-size:15px;line-height:1.6;margin:0;">{{ v.d }}</p></div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <!-- ============================= RESOURCES ============================= -->
+  <sc-if value="{{ isResources }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <section style="background:#f6f7f8;border-bottom:1px solid #e6e9eb;padding:clamp(40px,6vw,72px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;">
+        <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9aa1a7;margin-bottom:22px;"><a href="#" data-route="home" style="color:#9aa1a7;text-decoration:none;">Home</a> &nbsp;/&nbsp; <span style="color:#b8830d;">Resources</span></div>
+        <h1 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(34px,5vw,60px);line-height:1;letter-spacing:-.015em;margin:0 0 18px;max-width:840px;">Resources &amp; FAQs.</h1>
+        <p style="color:#5d666e;font-size:clamp(16px,1.4vw,19px);line-height:1.6;margin:0;max-width:640px;">Guidance to help you spec the right process &mdash; and quick answers to the questions we hear most.</p>
+      </div>
+    </section>
+    <section style="background:#fff;padding:clamp(48px,7vw,90px) clamp(18px,5vw,40px);">
+      <div style="max-width:1080px;margin:0 auto;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;"><span style="width:28px;height:2px;background:#ffb300;"></span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#b8830d;">Guide</span></div>
+        <h2 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(24px,3.2vw,38px);line-height:1.04;letter-spacing:-.01em;margin:0 0 26px;">Laser vs. waterjet &mdash; which to choose?</h2>
+        <div style="border:1px solid #e6e9eb;">
+          <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;background:#14171a;color:#fff;">
+            <div style="padding:16px 20px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9aa1a7;"></div>
+            <div style="padding:16px 20px;font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:700;font-size:16px;">Laser</div>
+            <div style="padding:16px 20px;font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:700;font-size:16px;">Waterjet</div>
+          </div>
+          <sc-for list="{{ compareRows }}" as="r" hint-placeholder-count="7">
+            <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;border-top:1px solid #e6e9eb;background:{{ r.bg }};">
+              <div style="padding:15px 20px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#6c757d;">{{ r.f }}</div>
+              <div style="padding:15px 20px;font-size:14.5px;color:#2a3036;">{{ r.l }}</div>
+              <div style="padding:15px 20px;font-size:14.5px;color:#2a3036;">{{ r.w }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <p style="color:#5d666e;font-size:15px;line-height:1.6;margin:22px 0 0;">Still unsure? Send your drawing and we&rsquo;ll recommend the right process for your part, material, and budget.</p>
+      </div>
+    </section>
+    <section style="background:#f6f7f8;border-top:1px solid #e6e9eb;padding:clamp(48px,7vw,90px) clamp(18px,5vw,40px);">
+      <div style="max-width:1080px;margin:0 auto;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;"><span style="width:28px;height:2px;background:#ffb300;"></span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#b8830d;">FAQs</span></div>
+        <div style="border-top:1px solid #d9dde0;">
+          <sc-for list="{{ faqs }}" as="q" hint-placeholder-count="7">
+            <div style="border-bottom:1px solid #d9dde0;">
+              <button data-faq="{{ q.idx }}" onClick="{{ toggleFaq }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;background:transparent;border:none;cursor:pointer;text-align:left;padding:22px 4px;">
+                <span style="font-weight:700;font-size:clamp(16px,1.7vw,19px);color:#14171a;">{{ q.q }}</span>
+                <span style="font-family:'Archivo Expanded','Archivo',sans-serif;font-size:24px;color:#b8830d;flex:0 0 auto;line-height:1;">{{ q.sign }}</span>
+              </button>
+              <sc-if value="{{ q.open }}" hint-placeholder-val="{{ false }}">
+                <p style="margin:0;padding:0 4px 26px;color:#5d666e;font-size:15.5px;line-height:1.65;max-width:760px;">{{ q.a }}</p>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+    <section style="background:#14171a;color:#fff;padding:clamp(52px,7vw,90px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:30px;">
+        <div style="max-width:640px;"><div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;"><span style="width:28px;height:2px;background:#ffb300;"></span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#ffb300;">Ready when you are</span></div><h2 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(26px,3.4vw,44px);line-height:1.04;letter-spacing:-.01em;margin:0;">Got the answers? Send the drawing.</h2></div>
+        <div style="display:flex;flex-wrap:wrap;gap:13px;"><a href="#" data-route="quote" style="display:inline-flex;align-items:center;gap:10px;background:#ffb300;color:#14171a;font-weight:700;font-size:16px;padding:18px 28px;text-decoration:none;">Request a Quote <span>&rarr;</span></a><a href="tel:4803067748" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#fff;font-weight:600;font-size:16px;padding:18px 26px;text-decoration:none;border:1px solid rgba(255,255,255,.28);">Call 480.306.7748</a></div>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <!-- ============================= AREAS ============================= -->
+  <sc-if value="{{ isAreas }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <section style="background:#f6f7f8;border-bottom:1px solid #e6e9eb;padding:clamp(40px,6vw,72px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;">
+        <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9aa1a7;margin-bottom:22px;"><a href="#" data-route="home" style="color:#9aa1a7;text-decoration:none;">Home</a> &nbsp;/&nbsp; <span style="color:#b8830d;">Areas We Serve</span></div>
+        <h1 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(34px,5vw,60px);line-height:1;letter-spacing:-.015em;margin:0 0 18px;max-width:840px;">Based in Phoenix. Shipping across North America.</h1>
+        <p style="color:#5d666e;font-size:clamp(16px,1.4vw,19px);line-height:1.6;margin:0;max-width:660px;">Our shop serves the entire Phoenix metro and greater Arizona, and we ship cut and formed parts across the United States, Mexico, and Canada.</p>
+      </div>
+    </section>
+    <section style="background:#fff;padding:clamp(48px,7vw,90px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px;"><span style="width:28px;height:2px;background:#ffb300;"></span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#b8830d;">Phoenix metro &amp; Arizona</span></div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:54px;">
+          <sc-for list="{{ areasMetro }}" as="a" hint-placeholder-count="14">
+            <span style="border:1px solid #d9dde0;padding:11px 18px;font-size:15px;font-weight:600;color:#2a3036;">{{ a }}</span>
+          </sc-for>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px;"><span style="width:28px;height:2px;background:#ffb300;"></span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#b8830d;">Regional reach</span></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:#e6e9eb;border:1px solid #e6e9eb;">
+          <sc-for list="{{ areasRegional }}" as="s" hint-placeholder-count="8">
+            <div style="background:#fff;padding:24px 22px;font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:700;font-size:18px;color:#14171a;">{{ s }}</div>
+          </sc-for>
+        </div>
+        <div style="margin-top:32px;background:#15181b;color:#fff;padding:30px 32px;display:flex;flex-wrap:wrap;align-items:center;gap:20px;justify-content:space-between;">
+          <div style="display:flex;align-items:center;gap:18px;"><span style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:30px;color:#ffb300;">US &middot; MX &middot; CA</span><span style="font-size:15px;color:#c8cdd1;line-height:1.5;max-width:420px;">We pack and ship parts continent-wide &mdash; tell us where it needs to go.</span></div>
+          <a href="#" data-route="quote" style="display:inline-flex;align-items:center;gap:9px;background:#ffb300;color:#14171a;font-weight:700;font-size:15px;padding:15px 22px;text-decoration:none;white-space:nowrap;">Request a Quote &rarr;</a>
+        </div>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <!-- ============================= ABOUT ============================= -->
+  <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <section style="position:relative;background:#15181b;color:#fff;overflow:hidden;">
+      <img src="assets/laser-detail.jpg" alt="Laser cutting detail" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.32;" />
+      <div style="position:absolute;inset:0;background:linear-gradient(100deg,rgba(21,24,27,.95),rgba(21,24,27,.6));"></div>
+      <div style="position:relative;max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(18px,5vw,40px);">
+        <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9aa1a7;margin-bottom:22px;"><a href="#" data-route="home" style="color:#9aa1a7;text-decoration:none;">Home</a> &nbsp;/&nbsp; <span style="color:#ffb300;">About</span></div>
+        <h1 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(34px,5.4vw,64px);line-height:1;letter-spacing:-.015em;margin:0 0 20px;max-width:820px;">Family-owned precision, for 20+ years.</h1>
+        <p style="color:#c8cdd1;font-size:clamp(16px,1.5vw,20px);line-height:1.6;margin:0;max-width:640px;">Southwest Waterjet &amp; Laser is a family-owned contract manufacturer in Phoenix, Arizona. We invest in the best machines &mdash; Trumpf and OMAX &mdash; and the people to run them, so engineers get accurate parts on tight timelines.</p>
+      </div>
+    </section>
+    <section style="background:#fff;padding:clamp(40px,6vw,72px) clamp(18px,5vw,40px);border-bottom:1px solid #e6e9eb;">
+      <div style="max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;gap:30px 60px;">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+          <div><div style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(34px,4vw,52px);line-height:1;color:#14171a;">{{ s.k }}</div><div style="font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:#6c757d;margin-top:8px;">{{ s.l }}</div></div>
+        </sc-for>
+      </div>
+    </section>
+    <section style="background:#fff;padding:clamp(48px,7vw,96px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;">
+        <h2 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(26px,3.4vw,42px);line-height:1.02;letter-spacing:-.01em;margin:0 0 14px;">Understand. Deliver. Improve.</h2>
+        <p style="color:#5d666e;font-size:16px;line-height:1.6;margin:0 0 40px;max-width:600px;">Three words that run the shop &mdash; and the way we treat every job.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:#e6e9eb;border:1px solid #e6e9eb;">
+          <sc-for list="{{ values }}" as="v" hint-placeholder-count="3">
+            <div style="background:#fff;padding:36px 32px;"><div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.1em;color:#b8830d;margin-bottom:14px;">{{ v.t }}</div><p style="color:#3a4147;font-size:16px;line-height:1.6;margin:0;">{{ v.d }}</p></div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+    <section style="background:#14171a;color:#fff;padding:clamp(52px,7vw,90px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:30px;">
+        <div style="max-width:640px;"><div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;"><span style="width:28px;height:2px;background:#ffb300;"></span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#ffb300;">Let&rsquo;s build something</span></div><h2 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(26px,3.4vw,44px);line-height:1.04;letter-spacing:-.01em;margin:0;">Talk to a real person who runs the floor.</h2></div>
+        <div style="display:flex;flex-wrap:wrap;gap:13px;"><a href="#" data-route="contact" style="display:inline-flex;align-items:center;gap:10px;background:#ffb300;color:#14171a;font-weight:700;font-size:16px;padding:18px 28px;text-decoration:none;">Contact us <span>&rarr;</span></a><a href="#" data-route="quote" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#fff;font-weight:600;font-size:16px;padding:18px 26px;text-decoration:none;border:1px solid rgba(255,255,255,.28);">Request a Quote</a></div>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <!-- ============================= CONTACT ============================= -->
+  <sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <section style="background:#f6f7f8;border-bottom:1px solid #e6e9eb;padding:clamp(40px,6vw,72px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;">
+        <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9aa1a7;margin-bottom:22px;"><a href="#" data-route="home" style="color:#9aa1a7;text-decoration:none;">Home</a> &nbsp;/&nbsp; <span style="color:#b8830d;">Contact</span></div>
+        <h1 style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:clamp(34px,5vw,60px);line-height:1;letter-spacing:-.015em;margin:0 0 18px;max-width:840px;">Get in touch.</h1>
+        <p style="color:#5d666e;font-size:clamp(16px,1.4vw,19px);line-height:1.6;margin:0;max-width:600px;">Call, email, or upload a drawing &mdash; we&rsquo;re here five days a week, two shifts a day.</p>
+      </div>
+    </section>
+    <section style="background:#fff;padding:clamp(48px,7vw,90px) clamp(18px,5vw,40px);">
+      <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:clamp(28px,4vw,48px);align-items:start;">
+        <div style="display:flex;flex-direction:column;gap:1px;background:#e6e9eb;border:1px solid #e6e9eb;">
+          <sc-for list="{{ contactRows }}" as="c" hint-placeholder-count="4">
+            <div style="background:#fff;padding:26px 28px;">
+              <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9aa1a7;margin-bottom:10px;">{{ c.label }}</div>
+              <div style="font-size:18px;font-weight:600;color:#14171a;line-height:1.4;">{{ c.value }}</div>
+            </div>
+          </sc-for>
+          <div style="background:#14171a;color:#fff;padding:26px 28px;display:flex;flex-wrap:wrap;gap:12px;">
+            <a href="tel:4803067748" style="flex:1;min-width:140px;text-align:center;background:#ffb300;color:#14171a;font-weight:700;font-size:15px;padding:14px;text-decoration:none;">Call now</a>
+            <a href="mailto:info@swwj-laser.com" style="flex:1;min-width:140px;text-align:center;background:transparent;border:1px solid rgba(255,255,255,.28);color:#fff;font-weight:600;font-size:15px;padding:14px;text-decoration:none;">Email us</a>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <a href="https://www.google.com/maps/search/?api=1&query=788+W+Illini+St+Phoenix+AZ+85041" target="_blank" rel="noopener" style="position:relative;display:block;height:280px;background:#1b1f23;overflow:hidden;text-decoration:none;">
+            <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:34px 34px;"></div>
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;">
+              <span style="width:18px;height:18px;background:#ffb300;border-radius:50%;box-shadow:0 0 0 8px rgba(255,179,0,.2);"></span>
+              <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#fff;">788 W. Illini St, Phoenix AZ</span>
+              <span style="color:#ffb300;font-weight:700;font-size:14px;">Get directions &rarr;</span>
+            </div>
+          </a>
+          <div style="background:#f6f7f8;border:1px solid #e6e9eb;padding:24px 26px;">
+            <div style="font-family:'Archivo Expanded','Archivo',sans-serif;font-weight:800;font-size:20px;margin-bottom:8px;">Prefer to upload a drawing?</div>
+            <p style="color:#5d666e;font-size:14.5px;line-height:1.55;margin:0 0 16px;">Send CAD files for the fastest, most accurate quote &mdash; back to you in 4&ndash;24 hours.</p>
+            <a href="#" data-route="quote" style="display:inline-flex;align-items:center;gap:9px;background:#14171a;color:#fff;font-weight:700;font-size:14.5px;padding:14px 20px;text-decoration:none;">Request a Quote &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  </main>
+
+  <!-- ============================= FOOTER ============================= -->
+  <footer style="background:#15181b;color:#aeb4ba;padding:clamp(56px,7vw,88px) clamp(18px,5vw,40px) 0;">
+    <div style="max-width:1280px;margin:0 auto;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:40px;padding-bottom:54px;border-bottom:1px solid rgba(255,255,255,.1);">
+        <div style="grid-column:span 1;min-width:220px;">
+          <img src="assets/logo.png" alt="Southwest Waterjet & Laser" style="height:42px;width:auto;filter:brightness(0) invert(1);opacity:.92;margin-bottom:20px;" />
+          <p style="font-size:14px;line-height:1.6;color:#9aa1a7;margin:0 0 18px;max-width:280px;">Family-owned precision contract manufacturer. Understand. Deliver. Improve.</p>
+          <div style="font-family:'Space Mono',monospace;font-size:12.5px;line-height:1.9;color:#c8cdd1;">
+            788 W. Illini St<br/>Phoenix, AZ 85041<br/><a href="tel:4803067748" style="color:#ffb300;text-decoration:none;">480.306.7748</a><br/><a href="mailto:info@swwj-laser.com" style="color:#c8cdd1;text-decoration:none;">info@swwj-laser.com</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#6c757d;margin-bottom:18px;">Capabilities</div>
+          <div style="display:flex;flex-direction:column;gap:11px;">
+            <sc-for list="{{ capList }}" as="c" hint-placeholder-count="6"><a href="#" data-route="capability" data-cap="{{ c.key }}" style="color:#c8cdd1;text-decoration:none;font-size:14px;">{{ c.name }}</a></sc-for>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#6c757d;margin-bottom:18px;">Company</div>
+          <div style="display:flex;flex-direction:column;gap:11px;">
+            <a href="#" data-route="equipment" style="color:#c8cdd1;text-decoration:none;font-size:14px;">Equipment</a>
+            <a href="#" data-route="materials" style="color:#c8cdd1;text-decoration:none;font-size:14px;">Materials We Cut</a>
+            <a href="#" data-route="industries" style="color:#c8cdd1;text-decoration:none;font-size:14px;">Industries Served</a>
+            <a href="#" data-route="quality" style="color:#c8cdd1;text-decoration:none;font-size:14px;">Quality</a>
+            <a href="#" data-route="resources" style="color:#c8cdd1;text-decoration:none;font-size:14px;">Resources</a>
+            <a href="#" data-route="areas" style="color:#c8cdd1;text-decoration:none;font-size:14px;">Areas We Serve</a>
+            <a href="#" data-route="about" style="color:#c8cdd1;text-decoration:none;font-size:14px;">About</a>
+            <a href="#" data-route="contact" style="color:#c8cdd1;text-decoration:none;font-size:14px;">Contact</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#6c757d;margin-bottom:18px;">Get a quote</div>
+          <p style="font-size:14px;line-height:1.6;color:#9aa1a7;margin:0 0 18px;">Upload a drawing for pricing in 4&ndash;24 hours.</p>
+          <a href="#" data-route="quote" style="display:inline-flex;align-items:center;gap:8px;background:#ffb300;color:#14171a;font-weight:700;font-size:14px;padding:13px 18px;text-decoration:none;margin-bottom:24px;">Request a Quote &rarr;</a>
+          <div style="display:flex;gap:14px;align-items:center;margin-top:8px;">
+            <img src="assets/ntma.png" alt="NTMA Member" style="height:36px;width:auto;background:#fff;padding:4px;" />
+            <img src="assets/iso.jpg" alt="ISO 9001:2015" style="height:44px;width:auto;background:#fff;padding:2px;" />
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding:24px 0 30px;font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.04em;color:#6c757d;text-transform:uppercase;">
+        <span>&copy; {{ year }} Southwest Waterjet &amp; Laser &middot; Southwest Waterjet Corp.</span>
+        <span>Ships across the US, Mexico &amp; Canada</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+</body>
+</html>
