@@ -51,7 +51,7 @@ input,textarea,select,button{font-family:inherit;}
   <header ref="{{ headerRef }}" style="position:sticky;top:0;z-index:60;background:rgba(255,255,255,.96);backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid #e6e9eb;">
     <div style="max-width:1280px;margin:0 auto;padding:0 clamp(18px,5vw,40px);height:74px;display:flex;align-items:center;justify-content:space-between;gap:24px;">
       <a href="#" data-route="home" style="display:flex;align-items:center;flex:0 0 auto;text-decoration:none;">
-        <img src="assets/logo.png" alt="Southwest Waterjet & Laser" style="height:38px;width:auto;" />
+        <img decoding="async" fetchpriority="high" src="assets/logo.webp" alt="Southwest Waterjet & Laser" style="height:38px;width:auto;" />
       </a>
       <nav data-navbar style="display:flex;align-items:center;gap:2px;">
         <div onMouseEnter="{{ openCaps }}" onMouseLeave="{{ closeCaps }}" style="position:relative;">
@@ -104,7 +104,7 @@ input,textarea,select,button{font-family:inherit;}
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
   <div>
     <section style="position:relative;background:#15181b;color:#fff;overflow:hidden;">
-      <img src="assets/hero-tube-laser.webp" alt="Tube laser cutting in progress" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.42;animation:scZoom 1.6s ease-out both;" />
+      <img decoding="async" loading="lazy" src="assets/hero-tube-laser.webp" alt="Tube laser cutting in progress" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.42;animation:scZoom 1.6s ease-out both;" />
       <div style="position:absolute;inset:0;background:linear-gradient(100deg,rgba(21,24,27,.94) 0%,rgba(21,24,27,.72) 46%,rgba(21,24,27,.32) 100%);"></div>
       <div style="position:absolute;left:0;right:0;bottom:0;height:140px;background:linear-gradient(to top,rgba(21,24,27,.9),transparent);"></div>
       <div style="position:relative;max-width:1280px;margin:0 auto;padding:clamp(70px,11vw,128px) clamp(18px,5vw,40px) clamp(56px,8vw,92px);">
@@ -132,8 +132,8 @@ input,textarea,select,button{font-family:inherit;}
     <section style="background:#f6f7f8;border-bottom:1px solid #e6e9eb;">
       <div style="max-width:1280px;margin:0 auto;padding:26px clamp(18px,5vw,40px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:28px;">
         <div style="display:flex;align-items:center;gap:26px;">
-          <img src="assets/iso.jpg" alt="ISO 9001:2015 Certified Company" style="height:58px;width:auto;" />
-          <img src="assets/ntma.png" alt="NTMA Member" style="height:42px;width:auto;" />
+          <img decoding="async" loading="lazy" src="assets/iso.webp" alt="ISO 9001:2015 Certified Company" style="height:58px;width:auto;" />
+          <img decoding="async" loading="lazy" src="assets/ntma.webp" alt="NTMA Member" style="height:42px;width:auto;" />
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:26px 44px;">
           <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
@@ -175,7 +175,7 @@ input,textarea,select,button{font-family:inherit;}
     <section style="background:#15181b;color:#fff;padding:clamp(64px,9vw,116px) clamp(18px,5vw,40px);">
       <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(36px,5vw,72px);align-items:center;">
         <div data-reveal style="position:relative;">
-          <img src="assets/trulaser-2030.webp" alt="Trumpf TruLaser 2030 fiber laser" style="width:100%;height:clamp(300px,38vw,480px);object-fit:cover;" />
+          <img decoding="async" loading="lazy" src="assets/trulaser-2030.webp" alt="Trumpf TruLaser 2030 fiber laser" style="width:100%;height:clamp(300px,38vw,480px);object-fit:cover;" />
           <div style="position:absolute;left:0;bottom:0;background:#ffb300;color:#14171a;padding:14px 20px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;">Trumpf TruLaser 2030</div>
         </div>
         <div data-reveal>
@@ -209,9 +209,9 @@ input,textarea,select,button{font-family:inherit;}
           <a href="#" data-route="materials" style="display:inline-flex;align-items:center;gap:10px;color:#14171a;font-weight:700;font-size:15px;text-decoration:none;border-bottom:2px solid #ffb300;padding-bottom:3px;">Browse all materials &rarr;</a>
         </div>
         <div data-reveal style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-          <img src="assets/waterjet-bed.webp" alt="Waterjet cutting bed" style="width:100%;height:230px;object-fit:cover;grid-column:1 / -1;" />
-          <img src="assets/tube-parts.jpg" alt="Cut stainless tube" style="width:100%;height:180px;object-fit:cover;" />
-          <img src="assets/foam-parts.jpg" alt="Waterjet-cut foam profiles" style="width:100%;height:180px;object-fit:cover;" />
+          <img decoding="async" loading="lazy" src="assets/waterjet-bed.webp" alt="Waterjet cutting bed" style="width:100%;height:230px;object-fit:cover;grid-column:1 / -1;" />
+          <img decoding="async" loading="lazy" src="assets/tube-parts.webp" alt="Cut stainless tube" style="width:100%;height:180px;object-fit:cover;" />
+          <img decoding="async" loading="lazy" src="assets/foam-parts.webp" alt="Waterjet-cut foam profiles" style="width:100%;height:180px;object-fit:cover;" />
         </div>
       </div>
     </section>
@@ -288,7 +288,7 @@ input,textarea,select,button{font-family:inherit;}
             </div>
           </div>
           <div style="position:relative;">
-            <img src="{{ cap.img }}" alt="{{ cap.name }}" style="width:100%;height:clamp(280px,34vw,420px);object-fit:cover;" />
+            <img decoding="async" loading="lazy" src="{{ cap.img }}" alt="{{ cap.name }}" style="width:100%;height:clamp(280px,34vw,420px);object-fit:cover;" />
           </div>
         </div>
       </div>
@@ -483,7 +483,7 @@ input,textarea,select,button{font-family:inherit;}
             <a href="tel:4803067748" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#14171a;color:#fff;text-decoration:none;font-weight:700;font-size:16px;padding:14px;">480.306.7748</a>
           </div>
           <div style="background:#fff;border:1px solid #e6e9eb;padding:22px 28px;display:flex;align-items:center;gap:18px;">
-            <img src="assets/iso.jpg" alt="ISO 9001:2015" style="height:48px;width:auto;" />
+            <img decoding="async" loading="lazy" src="assets/iso.webp" alt="ISO 9001:2015" style="height:48px;width:auto;" />
             <span style="font-size:13.5px;line-height:1.45;color:#5d666e;">ISO 9001:2015 certified &mdash; documented, repeatable quality on every job.</span>
           </div>
         </aside>
@@ -508,7 +508,7 @@ input,textarea,select,button{font-family:inherit;}
           <div data-reveal style="background:#fff;display:flex;flex-direction:column;">
             <sc-if value="{{ e.hasImg }}" hint-placeholder-val="{{ true }}">
               <div style="position:relative;height:210px;overflow:hidden;background:#15181b;">
-                <img src="{{ e.img }}" alt="{{ e.name }}" style="width:100%;height:100%;object-fit:cover;" />
+                <img decoding="async" loading="lazy" src="{{ e.img }}" alt="{{ e.name }}" style="width:100%;height:100%;object-fit:cover;" />
                 <sc-if value="{{ e.tag }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:0;left:0;background:#ffb300;color:#14171a;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;padding:7px 12px;">{{ e.tag }}</span></sc-if>
               </div>
             </sc-if>
@@ -638,12 +638,12 @@ input,textarea,select,button{font-family:inherit;}
         </div>
         <div style="display:flex;flex-direction:column;gap:16px;position:sticky;top:96px;">
           <div style="background:#f6f7f8;border:1px solid #e6e9eb;padding:34px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;">
-            <img src="assets/iso.jpg" alt="ISO 9001:2015 Certified Company" style="height:120px;width:auto;" />
+            <img decoding="async" loading="lazy" src="assets/iso.webp" alt="ISO 9001:2015 Certified Company" style="height:120px;width:auto;" />
             <div style="font-weight:700;font-size:17px;color:#14171a;">ISO 9001:2015 Certified</div>
             <p style="margin:0;font-size:14px;color:#5d666e;line-height:1.5;">A documented, audited quality management system across every process.</p>
           </div>
           <div style="background:#f6f7f8;border:1px solid #e6e9eb;padding:28px;display:flex;align-items:center;gap:20px;">
-            <img src="assets/ntma.png" alt="NTMA Member" style="height:52px;width:auto;flex:0 0 auto;" />
+            <img decoding="async" loading="lazy" src="assets/ntma.webp" alt="NTMA Member" style="height:52px;width:auto;flex:0 0 auto;" />
             <span style="font-size:14px;color:#5d666e;line-height:1.5;">Proud member of the National Tooling & Machining Association.</span>
           </div>
           <div style="background:#14171a;color:#fff;padding:28px;">
@@ -764,7 +764,7 @@ input,textarea,select,button{font-family:inherit;}
   <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
   <div>
     <section style="position:relative;background:#15181b;color:#fff;overflow:hidden;">
-      <img src="assets/laser-detail.jpg" alt="Laser cutting detail" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.32;" />
+      <img decoding="async" loading="lazy" src="assets/laser-detail.webp" alt="Laser cutting detail" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.32;" />
       <div style="position:absolute;inset:0;background:linear-gradient(100deg,rgba(21,24,27,.95),rgba(21,24,27,.6));"></div>
       <div style="position:relative;max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,88px) clamp(18px,5vw,40px);">
         <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9aa1a7;margin-bottom:22px;"><a href="#" data-route="home" style="color:#9aa1a7;text-decoration:none;">Home</a> &nbsp;/&nbsp; <span style="color:#ffb300;">About</span></div>
@@ -850,7 +850,7 @@ input,textarea,select,button{font-family:inherit;}
     <div style="max-width:1280px;margin:0 auto;">
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:40px;padding-bottom:54px;border-bottom:1px solid rgba(255,255,255,.1);">
         <div style="grid-column:span 1;min-width:220px;">
-          <img src="assets/logo.png" alt="Southwest Waterjet & Laser" style="height:42px;width:auto;filter:brightness(0) invert(1);opacity:.92;margin-bottom:20px;" />
+          <img decoding="async" loading="lazy" src="assets/logo.webp" alt="Southwest Waterjet & Laser" style="height:42px;width:auto;filter:brightness(0) invert(1);opacity:.92;margin-bottom:20px;" />
           <p style="font-size:14px;line-height:1.6;color:#9aa1a7;margin:0 0 18px;max-width:280px;">Family-owned precision contract manufacturer. Understand. Deliver. Improve.</p>
           <div style="font-family:'Space Mono',monospace;font-size:12.5px;line-height:1.9;color:#c8cdd1;">
             788 W. Illini St<br/>Phoenix, AZ 85041<br/><a href="tel:4803067748" style="color:#ffb300;text-decoration:none;">480.306.7748</a><br/><a href="mailto:info@swwj-laser.com" style="color:#c8cdd1;text-decoration:none;">info@swwj-laser.com</a>
@@ -880,8 +880,8 @@ input,textarea,select,button{font-family:inherit;}
           <p style="font-size:14px;line-height:1.6;color:#9aa1a7;margin:0 0 18px;">Upload a drawing for pricing in 4&ndash;24 hours.</p>
           <a href="#" data-route="quote" style="display:inline-flex;align-items:center;gap:8px;background:#ffb300;color:#14171a;font-weight:700;font-size:14px;padding:13px 18px;text-decoration:none;margin-bottom:24px;">Request a Quote &rarr;</a>
           <div style="display:flex;gap:14px;align-items:center;margin-top:8px;">
-            <img src="assets/ntma.png" alt="NTMA Member" style="height:36px;width:auto;background:#fff;padding:4px;" />
-            <img src="assets/iso.jpg" alt="ISO 9001:2015" style="height:44px;width:auto;background:#fff;padding:2px;" />
+            <img decoding="async" loading="lazy" src="assets/ntma.webp" alt="NTMA Member" style="height:36px;width:auto;background:#fff;padding:4px;" />
+            <img decoding="async" loading="lazy" src="assets/iso.webp" alt="ISO 9001:2015" style="height:44px;width:auto;background:#fff;padding:2px;" />
           </div>
         </div>
       </div>
@@ -917,7 +917,7 @@ class Component extends DCLogic {
       name:'Tube Laser Cutting', kicker:'Trumpf TruLaser Tube 5000 \u00b7 first in Arizona', num:'02', navMachine:'Tube 5000', machine:'Tube 5000',
       blurb:'Precise cutting, coping, and machining of round, square, and rectangular tube.',
       lead:'The first Trumpf tube laser in Arizona. Precise cutting, coping, drilling, and marking of round, square, and rectangular tube and structural profiles \u2014 in a single setup.',
-      img:'assets/tube-parts.jpg',
+      img:'assets/tube-parts.webp',
       specs:[{k:'Profiles',v:'Round, square, rectangular'},{k:'Processes',v:'Cut \u00b7 cope \u00b7 drill \u00b7 mark'},{k:'Materials',v:'Steel, stainless, aluminum'},{k:'Repeatability',v:'Production-grade'}],
       features:['Eliminates secondary machining and fit-up operations','Weld-ready joints straight off the machine','Consistent part-to-part quality at volume','Reduces assembly time downstream'],
       machines:[{name:'TruLaser Tube 5000',detail:'First in Arizona'}]
@@ -944,7 +944,7 @@ class Component extends DCLogic {
       name:'2D Inspection', kicker:'In-process quality', num:'05', navMachine:'2D', machine:'2D inspection',
       blurb:'In-process 2D inspection verifies parts against your drawings before they ship.',
       lead:'In-process 2D inspection verifies dimensions against your drawings before parts leave the floor \u2014 documented, repeatable, and backed by our ISO 9001:2015 system.',
-      img:'assets/inspection.jpg',
+      img:'assets/inspection.webp',
       specs:[{k:'Method',v:'2D optical inspection'},{k:'Reference',v:'Your CAD / drawings'},{k:'Output',v:'Dimensional verification'},{k:'Standard',v:'ISO 9001:2015'}],
       features:['First-article inspection on new parts','Documented, traceable results','Issues caught before they reach you','Confidence on critical dimensions']
     },
@@ -967,13 +967,13 @@ class Component extends DCLogic {
   ];
 
   equipment = [
-    { name:'Trumpf TruLaser Tube 5000', type:'Tube laser', tag:'First in Arizona', img:'assets/tube-parts.jpg', specs:['Round, square & rectangular tube','Cut \u00b7 cope \u00b7 drill \u00b7 mark','Weld-ready, secondary-op-free parts'] },
+    { name:'Trumpf TruLaser Tube 5000', type:'Tube laser', tag:'First in Arizona', img:'assets/tube-parts.webp', specs:['Round, square & rectangular tube','Cut \u00b7 cope \u00b7 drill \u00b7 mark','Weld-ready, secondary-op-free parts'] },
     { name:'OMAX 120 Waterjet', type:'5-axis abrasive waterjet', tag:'Largest in Arizona', img:'assets/waterjet-bed.webp', specs:['20\u2032 \u00d7 10\u2032 cutting bed','Up to 8\u2033 steel \u00b7 \u00b10.005\u2033','5-axis taper control \u00b7 no HAZ'] },
     { name:'Trumpf TruLaser 3040', type:'6 kW fiber flat laser', tag:'', img:'assets/trulaser-3040.webp', specs:['13\u2032 \u00d7 6.5\u2032 sheet capacity','6 kW fiber source','High-speed nesting'] },
     { name:'Trumpf TruLaser 5040 Fiber', type:'Fiber flat laser', tag:'', img:'', specs:['Large-format sheet & plate','High-output fiber cutting','Production throughput'] },
     { name:'Trumpf TruLaser 2030', type:'4 kW fiber laser', tag:'', img:'assets/trulaser-2030.webp', specs:['60\u2033 \u00d7 120\u2033 sheet','0.5\u2033 carbon \u00b7 0.25\u2033 SS \u00b7 0.25\u2033 alum','4 kW fiber source'] },
     { name:'Trumpf TruBend 5130', type:'Press brake', tag:'', img:'', specs:['Up to 120\u2033 bend length','Precision angle control','Integrated with cutting'] },
-    { name:'2D Optical Inspection', type:'Quality verification', tag:'ISO 9001:2015', img:'assets/inspection.jpg', specs:['Dimensional verification to CAD','First-article inspection','Documented results'] }
+    { name:'2D Optical Inspection', type:'Quality verification', tag:'ISO 9001:2015', img:'assets/inspection.webp', specs:['Dimensional verification to CAD','First-article inspection','Documented results'] }
   ];
 
   materials = [
